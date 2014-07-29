@@ -1,0 +1,94 @@
+[user]
+	name = tobynet
+	email = toby.net.info.mail+git@gmail.com
+[include]
+    path = .gitconfig.local
+[core]
+    whitespace = nowarn
+    #editor = ~/bin/git_editor.sh
+    editor = vim
+    # http://stackoverflow.com/questions/136178/git-diff-handling-long-lines
+    pager = less -r
+    quotepath = false
+[apply]
+    whitespace = nowarn
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+	ui = true
+[push]
+    # push only the current branch
+    default = tracking
+#[branch]
+#    autosetuprebase = always
+[merge]
+    # default 'git merge --no-ff'  # from 1.7.6
+    ff = false
+[pull]
+    # default 'git pull --rebase' # from 1.7.9
+    rebase = true
+[alias]
+    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai) %C(bold blue)<%an>%Creset' --abbrev-commit
+    la = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+    ll = log --graph --date=iso --decorate
+    lla = log --graph --date=iso --decorate --all
+    lp = log --graph --date=iso --decorate -p
+    lpa = log --graph --date=iso --decorate --all -p
+#    lp = 
+#    l = log --graph --date=iso --decorate
+#    la = log --graph --date=iso --decorate --all
+    lo = log --graph --date=iso --decorate --oneline
+    loa = log --graph --date=iso --decorate --oneline --all
+#    ll = log --graph --date=short --pretty=format:\"%Cgreen%h%d %cd %Cred%cn %Creset%s\" --decorate
+#    lla = log --graph --date=short --pretty=format:\"%Cgreen%h%d %cd %Cred%cn %Creset%s\" --decorate --all
+#    ll = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+#    lla = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
+    co = checkout
+    cob = checkout -b 
+    st = status --untracked-files=all --short --branch
+    sta = status --untracked-files=all
+    c = commit
+    cv = commit --verbose
+    cvc = commit --verbose -c HEAD
+    ci = commit
+    civ = commit --verbose
+    civc = commit --verbose -c HEAD
+    # add
+    a  = add -p
+    ad = add
+    ap = add -p
+    ai = add -i
+    # addしてcommit
+    cia = commit --all
+    ciav = commit --all --verbose
+    ciavc = commit --all --verbose -c HEAD
+    d = diff
+    dc = diff --cached
+    di = diff --color-words
+    dic = diff --color-words --cached
+    br = branch
+    bra = branch --all
+    dt = difftool
+    branch-delete = branch -d
+    branch-new = checkout -b
+    branch-all = branch -a
+    gitk-bg = !"gitk HEAD --not $(git rev-parse --remotes) &"
+  # See http://stackoverflow.com/questions/53569/how-to-get-the-changes-on-a-branch-in-git
+  #branch-name = !git branch 2>/dev/null | GREP_OPTIONS= grep -e ^* | tr -d '* '
+  branch-name = !git for-each-ref --format='%(refname:short)' $(git symbolic-ref HEAD)
+  branch-rename = !git branch -m `git branch-name` $1
+    merge-no-ff = merge --no-ff
+#  merge-rebase = !git rebase 
+    #cdroot = !"cd $(git rev-parse --show-toplevel)" # cdは駄目っぽい
+    # detail log
+    wp = whatchanged -p
+[gui]
+    encoding = utf-8
+[i18n]
+    commitencoding = UTF-8
+    logOutputEncoding = UTF-8
+[diff]
+    tool = vimdiff
+#    external = ~/bin/git_diff_wrapper.sh
