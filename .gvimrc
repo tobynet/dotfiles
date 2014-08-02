@@ -24,91 +24,22 @@ if has('multi_byte_ime') || has('xim')
   endif
 endif
 
-"マウスを有効にする。
-if has('mouse')
-  set mouse=a
-endif
+" Enable mouse
+if has('mouse') | set mouse=a | endif
 
-"----------------------------------------
-" 表示設定
-"----------------------------------------
-" 英語メニュー
-"set langmenu=en
-" ツールバーを非表示
-"set guioptions-=T
-" コマンドラインの高さ
-"set cmdheight=2
+" Change menu to English
+set langmenu=en
+" Hide toolbar
+set guioptions-=T
 
 " カラー設定:
 " 共通の色テーマは.vimrcで指定すること
-"colorscheme mycolor
-"colorscheme slate
-"colorscheme molokai
-"colorscheme solarized
+" desert, molokai, solarized
+colorscheme desert
 
 " 何故か？？？vimrcのhighlight設定が読み込まれない？？？
 " コメントがちょっと暗めなので明るくしておく
 "highlight Comment term=bold ctermfg=11 guifg=grey70
-
-
-" フォント設定
-set linespace=1
-if has('win32') || has('win64')
-"  set guifont=MeiryoKe_Console:h9:cSHIFTJIS
-"  set guifontwide=MeiryoKe_Console:h9:cSHIFTJIS
-  "set guifont=Ricty:h13.5:cDEFAULT
-  "set guifontwide=Ricty:h13.5:cDEFAULT
-  set guifont=Ricty:h13.5:cSHIFTJIS
-  set linespace=0
-elseif has('mac')
-  set guifont=Osaka－等幅:h14
-elseif has('xfontset')
-  set guifontset=a14,r14,k14
-  set linespace=0
-else
-endif
-
-" 透明スケスケにはしない
-"set transparency=-1
-
-"メッセージの日本語化
-"let $LANG='ja'
-
-""""""""""""""""""""""""""""""
-" Window位置の保存と復帰
-""""""""""""""""""""""""""""""
-if 1 && has('gui_running')
-  if has('unix')
-    let s:infofile = '~/.vim/.vimpos'
-  else
-    let s:infofile = '~/_vimpos'
-  endif
-
-  function! s:WinPosSizeSave(filename)
-    let saved_reg = @a
-    redir @a
-    winpos
-    redir END
-    let px = substitute(@a, '.*X \(\d\+\).*', '\1', '') + 0
-    let py = substitute(@a, '.*Y \(\d\+\).*', '\1', '') + 0
-    execute 'redir! >'.a:filename
-    if px > 0 && py > 0
-      echo 'winpos '.px.' '.py
-    endif
-    echo 'set lines='.&lines.' columns='.&columns
-    redir END
-    let @a = saved_reg
-  endfunction
-
-  augroup WinPosSizeSaver
-  autocmd!
-  augroup END
-  execute 'autocmd WinPosSizeSaver VimLeave * call s:WinPosSizeSave("'.s:infofile.'")'
-  if filereadable(expand(s:infofile))
-    execute 'source '.s:infofile
-  endif
-  unlet s:infofile
-endif
 
 "----------------------------------------
 " メニューアイテム作成
@@ -125,34 +56,3 @@ amenu <silent> 10.341 &File.更新時保存(&S)<Tab>:update  :if expand('%') == 
 amenu <silent> 10.400 &File.現バッファ差分表示(&D)<Tab>:DiffOrig  :DiffOrig<CR>
 amenu <silent> 10.401 &File.裏バッファと差分表示(&D)<Tab>:Diff\ #  :Diff #<CR>
 amenu <silent> 10.402 &File.差分表示(&D)<Tab>:Diff  :browse vertical diffsplit<CR>
-
-
-"----------------------------------------
-" タブ設定
-"----------------------------------------
-" set showtabline=2
-" " tab navigation like firefox
-" nmap <C-S-tab> :tabprevious<cr>
-" nmap <C-tab> :tabnext<cr>
-" map <C-S-tab> :tabprevious<cr>
-" map <C-tab> :tabnext<cr>
-" imap <C-S-tab> <ESC>:tabprevious<cr>i
-" imap <C-tab> <ESC>:tabnext<cr>i
-" "map <C-w> :tabclose<cr>
-" nmap <C-t> :tabnew<cr>
-" imap <C-t> <ESC>:tabnew<cr> 
-
-"----------------------------------------
-"  前回の設定を読む
-"----------------------------------------
-" Vim起動時に前回のセッションを復元する
-"let old_session_file = $CFGHOME . "/my_session.vim"
-"source old_session_file
-"source $CFGHOME/my_session.vim
-
-" Vim終了時に現在のセッションを保存する
-" うまく動かない
-"au VimLeave * mksession! old_session_file
-"au VimLeave * mksession! $CFGHOME/my_session.vim
-
-" vim:set et ts=2 sts=2 sw=2

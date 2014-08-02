@@ -1,4 +1,8 @@
 set encoding=utf-8
+if has('win32') || has('win64')
+  " To prevent garbled characters in cmd.exe
+  set termencoding=sjis
+endif
 
 scriptencoding utf-8
 "scriptencodingと、このファイルのエンコードが一致するよう注意！
@@ -22,166 +26,167 @@ scriptencoding utf-8
 " * todo: augroup の名前が統一されてない。命名規則を調べとく
 
 " plugins {{{
-filetype off                   " required!
-filetype plugin indent off     " required!
-if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-    call neobundle#rc(expand('~/.vim/bundle/'))
+if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
+  filetype off                   " required!
+  filetype plugin indent off     " required!
+  if has('vim_starting')
+      set runtimepath+=~/.vim/bundle/neobundle.vim/
+      call neobundle#rc(expand('~/.vim/bundle/'))
+  endif
+  " let NeoBundle manage NeoBundle
+  " ★★★   required! 
+  "NeoBundle 'Shougo/neobundle.vim'
+
+  " ★ for template
+  NeoBundle 'thinca/vim-template'
+
+  " ★ instantly run command
+  NeoBundle 'thinca/vim-quickrun'
+  " ★ asynchronously
+  NeoBundle 'Shougo/vimproc'
+  " for quickrun 'browser' outputter
+  NeoBundle 'tyru/open-browser.vim'
+
+  " ★ref.vim
+  " TIPS: shift+k で ref.vim でリファレンスを参照する
+  " TIPS: :Ref <Tab> で ref.vim でリファレンスを参照する
+  NeoBundle 'thinca/vim-ref'
+  " ★  便利!!! ref.vim の 標準refe が動かしにくいので ri を使うvim-refプラグイン
+  NeoBundle 'taka84u9/vim-ref-ri'
+
+  " benchmark plugin
+  " TIPS: :BenchVimrc でvimrcの行毎のベンチマークとる, %sort! で遅い順(降順)に並び替え
+  " TODO: :BenchVimrc から %sort! を同時にしたい
+  NeoBundleLazy 'mattn/benchvimrc-vim'
+
+  " ★★syntax checker
+  " needs some syntax checkers like,
+  " html:       $ sudo apt-get install tidy
+  " python:     $ sudo pip install flake8
+  " yaml:       $ sudo npm install -g js-yaml
+  " javascript: $ sudo npm install -g jshint
+  NeoBundle 'scrooloose/syntastic'
+
+  " ★★★like rspec
+  NeoBundle 'kana/vim-vspec'
+
+  " special looks statusbar
+  NeoBundle 'Lokaltog/vim-powerline'
+
+  " for git
+  NeoBundle 'tpope/vim-fugitive'
+  " for git diff like IDE
+  NeoBundle 'airblade/vim-gitgutter'
+  " tig fo vim
+  NeoBundle 'gregsexton/gitv'
+
+  " for ruby, I want to hit 'K' to ref from ri!!!!!
+  "NeoBundle 'vim-ruby/vim-ruby'
+
+  " for javascript indent
+  NeoBundle 'pangloss/vim-javascript'
+
+  " 自動的に 括弧や do end を閉じる 
+  " lua, ruby, sh, zsh, vb, vbnet, vim 辺りに対応してる
+  " refs. http://d.hatena.ne.jp/babie/20110130/1296348755
+  NeoBundle 'tpope/vim-endwise'
+
+  " for tabpagecd
+  "NeoBundle 'kana/vim-tabpagecd'
+  NeoBundle 'tobynet/vim-tabpagecd'
+
+  " for 対応する括弧を入力したりする。 IDEっぽい
+  "NeoBundle 'kana/vim-smartinput'
+
+  " for Haml and Sass, SCSS
+  NeoBundle 'tpope/vim-haml'
+  " for Slim
+  NeoBundleLazy 'bbommarito/vim-slim'
+  " for CoffeeScript
+  NeoBundle 'kchmck/vim-coffee-script'
+  " for stylus
+  NeoBundle 'wavded/vim-stylus'
+
+  " ipython integration おれも何がおこったのかわからなかった
+  "
+  NeoBundle 'ivanov/vim-ipython'
+
+  " for haskell
+  " cabal install ghc-mod
+  " 
+
+  " yet another markdown plugin
+  NeoBundle 'tpope/vim-markdown'
+
+  " for indent visualization 
+  "NeoBundle 'nathanaelkane/vim-indent-guides'
+  NeoBundleLazy 'Yggdroot/indentLine'
+
+  " for markdown-preview
+  " refs. http://mattn.kaoriya.net/software/vim/20120208161751.htm
+  " TIPS: :MkdPreview! markdownのプレビュー
+  " install: 
+  "   $ sudo apt-get -y install python-pip
+  "   $ pip install Markdown
+  NeoBundleLazy 'mattn/webapi-vim'
+  NeoBundleLazy 'mattn/mkdpreview-vim'
+
+  " for markdown-preview
+  " requrements.
+  "   $ gem install redcarpet pygments.rb
+  "   $ sudo npm -g install instant-markdown-d
+  NeoBundleLazy 'suan/vim-instant-markdown'
+
+  " CTRL+P to find something
+  NeoBundle 'kien/ctrlp.vim'
+  " CTRL+P plugin for mark
+  NeoBundle 'mattn/ctrlp-mark'
+  " CTRL+P plugin for register
+  NeoBundle 'mattn/ctrlp-register'
+  " CTRL+P plugin for yanking, cmdline, menu
+  NeoBundle 'sgur/ctrlp-extensions.vim'
+
+  " NERD_tree.vim(include trinity) + taglist.vim + srcexpl.vim
+  " NeoBundle 'trinity.vim'
+  " NeoBundle 'taglist.vim'
+  " NeoBundle 'Source-Explorer-srcexpl.vim'
+  " 
+  " easy to add comment
+  NeoBundle 'tomtom/tcomment_vim'
+
+  " web browser
+  NeoBundle 'yuratomo/w3m.vim'
+
+  " Emmet
+  NeoBundle 'mattn/emmet-vim'
+
+  " html5
+  NeoBundle 'othree/html5.vim'
+
+  " coq
+  NeoBundle 'trefis/coquille'
+
+  " 図形描画
+  " TIPS: \di 図形描画開始 \ds 終了. DrawIt plugin
+  NeoBundle 'DrawIt'
+
+  " puppet support
+  NeoBundle 'rodjek/vim-puppet'
+
+  " 文字数カウンタ
+  " :echo b:charCounterCount
+  " :AnekoS_CharCounter_CharCount
+  NeoBundle 'anekos/char-counter-vim'
+
+  filetype plugin indent on     " required!
+  "
+  " Brief help
+  " :NeoBundleList          - list configured bundles
+  " :NeoBundleInstall(!)    - install(update) bundles
+  " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+
+  " }}}
 endif
-" let NeoBundle manage NeoBundle
-" ★★★   required! 
-"NeoBundle 'Shougo/neobundle.vim'
-
-" ★ for template
-NeoBundle 'thinca/vim-template'
-
-" ★ instantly run command
-NeoBundle 'thinca/vim-quickrun'
-" ★ asynchronously
-NeoBundle 'Shougo/vimproc'
-" for quickrun 'browser' outputter
-NeoBundle 'tyru/open-browser.vim'
-
-" ★ref.vim
-" TIPS: shift+k で ref.vim でリファレンスを参照する
-" TIPS: :Ref <Tab> で ref.vim でリファレンスを参照する
-NeoBundle 'thinca/vim-ref'
-" ★  便利!!! ref.vim の 標準refe が動かしにくいので ri を使うvim-refプラグイン
-NeoBundle 'taka84u9/vim-ref-ri'
-
-" benchmark plugin
-" TIPS: :BenchVimrc でvimrcの行毎のベンチマークとる, %sort! で遅い順(降順)に並び替え
-" TODO: :BenchVimrc から %sort! を同時にしたい
-NeoBundleLazy 'mattn/benchvimrc-vim'
-
-" ★★syntax checker
-" needs some syntax checkers like,
-" html:       $ sudo apt-get install tidy
-" python:     $ sudo pip install flake8
-" yaml:       $ sudo npm install -g js-yaml
-" javascript: $ sudo npm install -g jshint
-NeoBundle 'scrooloose/syntastic'
-
-" ★★★like rspec
-NeoBundle 'kana/vim-vspec'
-
-" special looks statusbar
-NeoBundle 'Lokaltog/vim-powerline'
-
-" for git
-NeoBundle 'tpope/vim-fugitive'
-" for git diff like IDE
-NeoBundle 'airblade/vim-gitgutter'
-" tig fo vim
-NeoBundle 'gregsexton/gitv'
-
-" for ruby, I want to hit 'K' to ref from ri!!!!!
-"NeoBundle 'vim-ruby/vim-ruby'
-
-" for javascript indent
-NeoBundle 'pangloss/vim-javascript'
-
-" 自動的に 括弧や do end を閉じる 
-" lua, ruby, sh, zsh, vb, vbnet, vim 辺りに対応してる
-" refs. http://d.hatena.ne.jp/babie/20110130/1296348755
-NeoBundle 'tpope/vim-endwise'
-
-" for tabpagecd
-"NeoBundle 'kana/vim-tabpagecd'
-NeoBundle 'toooooooby/vim-tabpagecd'
-
-" for 対応する括弧を入力したりする。 IDEっぽい
-"NeoBundle 'kana/vim-smartinput'
-
-" for Haml and Sass, SCSS
-NeoBundle 'tpope/vim-haml'
-" for Slim
-NeoBundleLazy 'bbommarito/vim-slim'
-" for CoffeeScript
-NeoBundle 'kchmck/vim-coffee-script'
-" for stylus
-NeoBundle 'wavded/vim-stylus'
-
-" ipython integration おれも何がおこったのかわからなかった
-"
-NeoBundle 'ivanov/vim-ipython'
-
-" for haskell
-" cabal install ghc-mod
-" 
-
-" yet another markdown plugin
-NeoBundle 'tpope/vim-markdown'
-
-" for indent visualization 
-"NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundleLazy 'Yggdroot/indentLine'
-
-" for markdown-preview
-" refs. http://mattn.kaoriya.net/software/vim/20120208161751.htm
-" TIPS: :MkdPreview! markdownのプレビュー
-" install: 
-"   $ sudo apt-get -y install python-pip
-"   $ pip install Markdown
-NeoBundleLazy 'mattn/webapi-vim'
-NeoBundleLazy 'mattn/mkdpreview-vim'
-
-" for markdown-preview
-" requrements.
-"   $ gem install redcarpet pygments.rb
-"   $ sudo npm -g install instant-markdown-d
-NeoBundleLazy 'suan/vim-instant-markdown'
-
-" CTRL+P to find something
-NeoBundle 'kien/ctrlp.vim'
-" CTRL+P plugin for mark
-NeoBundle 'mattn/ctrlp-mark'
-" CTRL+P plugin for register
-NeoBundle 'mattn/ctrlp-register'
-" CTRL+P plugin for yanking, cmdline, menu
-NeoBundle 'sgur/ctrlp-extensions.vim'
-
-" NERD_tree.vim(include trinity) + taglist.vim + srcexpl.vim
-" NeoBundle 'trinity.vim'
-" NeoBundle 'taglist.vim'
-" NeoBundle 'Source-Explorer-srcexpl.vim'
-" 
-" easy to add comment
-NeoBundle 'tomtom/tcomment_vim'
-
-" web browser
-NeoBundle 'yuratomo/w3m.vim'
-
-" Emmet
-NeoBundle 'mattn/emmet-vim'
-
-" html5
-NeoBundle 'othree/html5.vim'
-
-" coq
-NeoBundle 'trefis/coquille'
-
-" 図形描画
-" TIPS: \di 図形描画開始 \ds 終了. DrawIt plugin
-NeoBundle 'DrawIt'
-
-" puppet support
-NeoBundle 'rodjek/vim-puppet'
-
-" 文字数カウンタ
-" :echo b:charCounterCount
-" :AnekoS_CharCounter_CharCount
-NeoBundle 'anekos/char-counter-vim'
-
-filetype plugin indent on     " required!
-"
-" Brief help
-" :NeoBundleList          - list configured bundles
-" :NeoBundleInstall(!)    - install(update) bundles
-" :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-
-" }}}
-
 
 " refs. vimエディタが（勝手に）作成する、一見、不要に見えるファイルが何をしているか — 名無しのvim使い http://nanasi.jp/articles/howto/file/seemingly-unneeded-file.html
 "ファイルの上書きの前にバックアップを作る/作らない
@@ -220,7 +225,7 @@ else
       if !isdirectory(backup_directory)   | call mkdir(backup_directory, "p", 0700)   | endif
       if !isdirectory(view_directory)     | call mkdir(view_directory, "p", 0700)     | endif
   endif
-
+	
   let &dir=tmp_directory
   let &backupdir=backup_directory
   let &viewdir=backup_directory
@@ -239,7 +244,7 @@ set nrformats-=octal
 "編集結果非保存のバッファから、新しいバッファを開くときに警告を出さない。
 set hidden
 "ヒストリの保存数
-set history=500000
+set history=10000
 "日本語の行の連結時には空白を入力しない。
 set formatoptions+=mM
 "Visual blockモードでフリーカーソルを有効にする
@@ -258,9 +263,9 @@ filetype plugin on
 "  プラグイン(CtrlPで確認)にも影響する
 "  一時ファイルやテンポラリを無視するようにするとよさそう
 if has('win32') || has('win64')
-  set wildignore+=**/tmp/,*.swp,*.zip,*.exe    " Windows
+  set wildignore+=**/tmp/,*.swp,*.zip,*.exe,.git/**    " Windows
 else
-  set wildignore+=**/tmp/,*.so,*.swp,*.zip   " Linux/MacOSX
+  set wildignore+=**/tmp/,*.so,*.swp,*.zip,.git/**   " Linux/MacOSX
 endif
 
 "----------------------------------------
@@ -425,7 +430,9 @@ nnoremap <Space>a :<C-u>append!<CR>
 if has('gui_running')
     " gvim用のフォントを変える
     " For programming font, Ricty http://save.sys.t.u-tokyo.ac.jp/~yusa/fonts/ricty.html
-    set guifont=Ricty\ Discord\ 11
+    " set guifont=Ricty\ Discord\ 11
+    set guifont=Ricty_Diminished_Discord:h12
+    set linespace=0
     
     " □や○の文字があってもカーソル位置がずれないように、
     " 記号を二文字分の幅としとして扱う
@@ -447,10 +454,11 @@ function! s:highlight_mycolor()
     " gvimの背景を黄色っぽい感じにする 
     " autocmdを避けてちらつきを避けてるけど、
     " 参考: 背景: ffffdd(255, 255, 221) LightYellow が近い, 背景+vim cheatsheetの壁紙(暗め): eef1cd(rgb: 238, 241, 205) cornsilk2, LightYellow2
-    highlight! Normal guibg=cornsilk1
     "highlight! Normal guibg=LightYellow1
+    " 暗い colorschemeでも明るくなるのでいったん止め
+    " highlight! Normal guibg=cornsilk1
 
-    " showmatchの色が見づらいので見やすく
+    
     "highlight! MatchParen term=bold ctermbg=8 guibg=red
     "highlight! MatchParen term=bold ctermbg=white guibg=white
     highlight! MatchParen ctermbg=white guibg=white
