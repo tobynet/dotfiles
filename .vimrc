@@ -431,7 +431,7 @@ if has('gui_running')
     " gvim用のフォントを変える
     " For programming font, Ricty http://save.sys.t.u-tokyo.ac.jp/~yusa/fonts/ricty.html
     " set guifont=Ricty\ Discord\ 11
-    set guifont=Ricty_Diminished_Discord:h12
+    set guifont=Ricty_Diminished_Discord:h14
     set linespace=0
     
     " □や○の文字があってもカーソル位置がずれないように、
@@ -957,7 +957,7 @@ function! s:open_memo(options)
   let context = get(a:options, 'context', '')
   let date = get(a:options, 'date', s:today())
   let memo_dir = $HOME . '/memo/'
-  if context =~ memo_dir
+  if filereadable(context) || context =~ memo_dir
     " ふつーのファイルっぽい指定がされてたら、
     " {'context': '/home/user/memo/2012-01-01_diary.txt' } →  そのまま開く
     let memo_filename = context
@@ -1398,5 +1398,9 @@ let g:rsenseHome = expand('~/.vim/bundle/rsense')
 " TODO: vim-ref-jquery(オフライン) http://d.hatena.ne.jp/soh335/20110118/1295340856
 " TODO: 辞書から補完したい
 " TODO: 複数立ち上げたVimで履歴を共有できるようにしたい
-" TODO: vimにて、 一つ前の CTRL^ で一つ前のファイルを行き来するように、一つ前のファイル一つ後のファイルに移動したい
 
+set iminsert=1
+
+if filereadable(expand('~/.vimrc_local'))
+  source ~/.vimrc_local
+endif
