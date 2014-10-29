@@ -885,7 +885,7 @@ nnoremap <Space>I :<C-u>GrepMemo \c\[idea\]<left><left>
 " TODOのリストを開く {{{
 " 今のところは自分のファイルのTODOをすぐ確認するためだけ
 command! -nargs=?   Todos   noautocmd vimgrep /\ctodo\:/g % | cwindow
-nnoremap <Space>t :<C-u>Todos<CR>
+nnoremap <Space>to :<C-u>Todos<CR>
 " }}}
 
 
@@ -1336,6 +1336,46 @@ function! s:filetype_python_init()
   setl foldlevel=99
 endfunction
 
+" }}}
+
+"----------------------------------------
+" 簡易todo処理 {{{
+" ref. http://naoty.hatenablog.com/entry/2013/04/28/002926
+
+" Press 'tl' and <SPACE> to insert a new todo
+abbreviate tl - todo:
+abbreviate tL - [ ] 
+" Press <Sapce>ta to insert a new todo
+nnoremap <Space>ta ^itodo: <ESC>
+nnoremap <Space>tA ^i- [ ] <ESC>
+
+" Press <space>tt to toggle todos
+nnoremap <Space>tt :<C-u>call ToggleTodoStatus()<CR>
+
+" A Function for 
+function! ToggleTodoStatus()
+  let l:line = getline('.')
+
+  " '* todo:' <-> '* DONE:'
+  if l:line =~ '[\-\*]\stodo:'
+    echo '- todo: -> DONE:'
+    let l:result = substitute(l:line, '[\-\*]\stodo:', '* DONE:', '')
+  elseif l:line =~ '[\-\*]\sDONE:'
+    echo '- DONE: -> todo:'
+    let l:result = substitute(l:line, '[\-\*]\sDONE:', '* todo:', '')
+
+  " '- [ ] ' <-> '- [x] '
+  elseif l:line =~ '[\-\*]\s\[\s\]'
+    echo '- [ ] -> [x] '
+    let l:result = substitute(l:line, '[\-\*]\s\[\s\]', '- [x]', '')
+  elseif l:line =~ '[\-\*]\s\[x\]'
+    echo '- [x] -> [ ] '
+    let l:result = substitute(l:line, '[\-\*]\s\[x\]', '- [ ]', '')
+  else
+    return
+  end
+  call setline('.', l:result)
+endfunction
 " }}}
 
 "----------------------------------------
