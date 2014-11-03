@@ -317,23 +317,19 @@ fi
 # refs. .zshrc.localのススメ http://qiita.com/items/1d5cd440ce58ef4fb8ae
 [[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
 
-# DAILY TIPSみたいなのを表示する
+# Show like DAILY TIPS
 [[ -x $(which tips-english-random.rb) ]] && tips-english-random.rb
 [[ -x $(which tipsrandom.zsh) ]] && tipsrandom.zsh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+### Added for node-js
 if [[ -d $HOME/.ndenv ]]; then
     export PATH="$HOME/.ndenv/bin:$PATH"
     eval "$(ndenv init -)"
 fi
 
-
-### Added for packer http://www.packer.io/intro/getting-started/setup.html
-if [[ -d $HOME/opt/packer ]]; then
-    export PATH="$HOME/opt/packer:$PATH"
-fi
 
 ### Added for SML nj http://www.smlnj.org/install/
 if [[ -d "$HOME/opt/sml/bin" ]]; then
@@ -347,17 +343,9 @@ if [[ -d "$HOME/opt/adt-bundle/sdk" ]]; then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/opt/adt-bundle/sdk/tools/lib
 fi
 
-### Added for KeePassX 
-if [[ -d "$HOME/opt/keepassx/bin" ]]; then
-    export PATH="$HOME/opt/keepassx/bin:$PATH"
-fi
-
 # added by travis gem
-source $HOME/.travis/travis.sh
-
-# Added for nodewebkit
-if [[ -d "$HOME/opt/node-webkit/" ]]; then
-    export PATH="$HOME/opt/node-webkit:$PATH"
+if [[ -d "$HOME/.travis/travis.sh" ]]; then
+    source $HOME/.travis/travis.sh
 fi
 
 # Add for golang
