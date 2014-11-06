@@ -1366,6 +1366,16 @@ endfunction
 " }}}
 
 "----------------------------------------
+" For prolog {{{
+
+augroup my_prolog
+  autocmd!
+
+  " Reassign filetype some file extension as prolog
+  autocmd BufRead,BufNewFile *.pro,*.swi set filetype=prolog
+augroup END
+
+"----------------------------------------
 " 簡易todo処理 {{{
 " ref. http://naoty.hatenablog.com/entry/2013/04/28/002926
 
