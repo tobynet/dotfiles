@@ -1,4 +1,9 @@
 set encoding=utf-8
+
+" Note: Skip initialization for vim-tiny or vim-small.
+if !1 | finish | endif
+
+
 if has('win32') || has('win64')
   " To prevent garbled characters in cmd.exe
   set termencoding=sjis
@@ -27,12 +32,17 @@ scriptencoding utf-8
 
 " plugins {{{
 if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
+
   filetype off                   " required!
   filetype plugin indent off     " required!
   if has('vim_starting')
-      set runtimepath+=~/.vim/bundle/neobundle.vim/
-      call neobundle#rc(expand('~/.vim/bundle/'))
+    set nocompatible
+
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
   endif
+
+  call neobundle#begin(expand('~/.vim/bundle/'))
+  
   " let NeoBundle manage NeoBundle
   " ★★★   required! 
   "NeoBundle 'Shougo/neobundle.vim'
@@ -43,7 +53,16 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
   " ★ instantly run command
   NeoBundle 'thinca/vim-quickrun'
   " ★ asynchronously
-  NeoBundle 'Shougo/vimproc'
+  NeoBundle 'Shougo/vimproc.vim', {
+  \ 'build' : {
+  \     'windows' : 'tools\\update-dll-mingw',
+  \     'cygwin' : 'make -f make_cygwin.mak',
+  \     'mac' : 'make -f make_mac.mak',
+  \     'linux' : 'make',
+  \     'unix' : 'gmake',
+  \    },
+  \ }
+
   " for quickrun 'browser' outputter
   NeoBundle 'tyru/open-browser.vim'
 
@@ -101,7 +120,8 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
   " for Haml and Sass, SCSS
   NeoBundle 'tpope/vim-haml'
   " for Slim
-  NeoBundleLazy 'bbommarito/vim-slim'
+  NeoBundleLazy 'slim-template/vim-slim'
+
   " for CoffeeScript
   NeoBundle 'kchmck/vim-coffee-script'
   " for stylus
@@ -177,6 +197,11 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
   " :echo b:charCounterCount
   " :AnekoS_CharCounter_CharCount
   NeoBundle 'anekos/char-counter-vim'
+
+  " Prolog support
+  NeoBundle 'adimit/prolog.vim'
+
+  call neobundle#end()
 
   filetype plugin indent on     " required!
   "
