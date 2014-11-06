@@ -490,6 +490,8 @@ function! s:highlight_mycolor()
     " TODO とか FIXED の類を見やすく
     highlight! Todo term=bold cterm=bold ctermfg=white gui=bold guifg=white guibg=darkyellow
 
+    highlight! Search term=standout cterm=NONE ctermbg=LightYellow
+
     " vimdiff の白基調だと見づらいのでの修正
     " refs.  https://github.com/altercation/vim-colors-solarized/blob/master/colors/solarized.vim
     " highlight! DiffAdd    term=NONE cterm=NONE ctermfg=DarkGreen ctermbg=LightGreen guisp=DarkYellow
