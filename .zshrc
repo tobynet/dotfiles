@@ -53,7 +53,7 @@ ZSH_THEME="random"
 plugins=(git)
 #
 #### my plugin setting ####
-plugins+=(ruby gem rake thor rbenv rails rails3)
+plugins+=(ruby gem rake thor rbenv rails)
 plugins+=(bundler)                # for ruby http://gembundler.com/
 plugins+=(cap)                    # capistrano  https://github.com/capistrano/capistrano
 plugins+=(command-not-found)
