@@ -308,10 +308,10 @@ set noshowmatch
 set matchtime=0
 "タブを設定
 " ハードタブの見た目の幅を設定
-set tabstop=2
+set tabstop=4
 " インデント幅を設定
 " tabstop < shiftwidth で expandtab が off の時はインデント時にハードタブとスペースが混在するので注意
-set shiftwidth=2
+set shiftwidth=4
 " タブ周りを適当にスマートな感じの動作にする
 " shiftwidth, tabstop を考慮して上手いことタブを入れたり、
 " <BS>で後ろがハードタブのように空白を一度に削除する
@@ -1361,6 +1361,21 @@ function! s:filetype_python_init()
   " Folding
   setl foldmethod=indent
   setl foldlevel=99
+endfunction
+
+" }}}
+
+"----------------------------------------
+" Ruby関係の設定 {{{
+augroup my_ruby
+  autocmd!
+  autocmd FileType ruby call s:filetype_ruby_init()
+augroup END
+
+function! s:filetype_ruby_init()
+  setl tabstop=2
+  setl softtabstop=2
+  setl shiftwidth=2
 endfunction
 
 " }}}
