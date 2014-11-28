@@ -1508,6 +1508,7 @@ let g:rsenseHome = expand('~/.vim/bundle/rsense')
 " TODO: vim-ref-jquery(オフライン) http://d.hatena.ne.jp/soh335/20110118/1295340856
 " TODO: 辞書から補完したい
 " TODO: 複数立ち上げたVimで履歴を共有できるようにしたい
+" TODO: vimにて、 一つ前の CTRL^ で一つ前のファイルを行き来するように、一つ前のファイル一つ後のファイルに移動したい
 
 set iminsert=1
 
