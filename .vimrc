@@ -458,8 +458,11 @@ nnoremap <Space>a :<C-u>append!<CR>
 if has('gui_running')
     " gvim用のフォントを変える
     " For programming font, Ricty http://save.sys.t.u-tokyo.ac.jp/~yusa/fonts/ricty.html
-    " set guifont=Ricty\ Discord\ 11
-    set guifont=Ricty_Diminished_Discord:h14
+    if has('gui_gtk2')
+      set guifont=Ricty\ Diminished\ Discord\ 11
+    else
+      set guifont=Ricty_Diminished_Discord:h12
+    endif
     set linespace=0
     
     " □や○の文字があってもカーソル位置がずれないように、
