@@ -186,6 +186,9 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
   " coq
   NeoBundle 'trefis/coquille'
 
+  " scala
+  NeoBundle 'derekwyatt/vim-scala'
+
   " 図形描画
   " TIPS: \di 図形描画開始 \ds 終了. DrawIt plugin
   NeoBundle 'DrawIt'
