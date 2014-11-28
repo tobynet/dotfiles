@@ -857,7 +857,7 @@ augroup memo
 "  autocmd Syntax markdown call s:set_my_syntax()
 "
   " Markdown from filetype.vim
-  "autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,README.md set filetype=markdown.marktag
+  autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,README.md set filetype=markdown
 augroup END
 
 function! s:filetype_markdown_init()
@@ -902,7 +902,7 @@ nnoremap <Space>mG :<C-u>call <SID>grep_memo({})<CR>
 "memoをgrepする汎用関数
 function! s:grep_memo(options)
   " merge default options
-  call extend(a:options, {'directory': '~/memo/**/*.txt ~/memo/notebook/**/*.py'})
+  call extend(a:options, {'directory': '~/memo/**/*.txt ~/memo/**/*.md ~/memo/**/*.mkd ~/memo/notebook/**/*.py'})
   call s:easy_grep(a:options)
 endfunction
 " }}}
@@ -1001,7 +1001,7 @@ function! s:open_memo(options)
       " diary -> _diary
       let context = '_' . context
     endif
-    let memo_filename = memo_dir . date . context . '.txt'
+    let memo_filename = memo_dir . date . context . '.md'
   endif
 
   execute 'edit ' . fnameescape(memo_filename)
