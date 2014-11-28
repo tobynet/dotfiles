@@ -1288,8 +1288,10 @@ endfunction
 let g:ref_source_webdict_sites = {
 \   'wikipedia:ja':     'http://ja.wikipedia.org/wiki/%s',
 \   'alc':              {'url': 'http://eow.alc.co.jp/search?q=%s'},
-\   'weblio_ejje':      {'url': 'http://ejje.weblio.jp/content/%s'},
-\   'weblio_thesaurus': {'url': 'http://thesaurus.weblio.jp/content/%s'},
+\   'weblio_ejje':      {'url': 'http://ejje.weblio.jp/content/%s', 'cache': 1},
+\   'weblio_ejje_examples': 
+\       {'url': 'http://ejje.weblio.jp/content/%s', 'cache': 1},
+\   'weblio_thesaurus': {'url': 'http://thesaurus.weblio.jp/content/%s', 'cache': 1},
 \   'reference_com':    {'url': 'http://dictionary.reference.com/browse/%s'},
 \ }
 
@@ -1299,13 +1301,21 @@ let g:ref_source_webdict_sites.default = 'weblio_ejje'
 
 " 出力フィルタ
 function! g:ref_source_webdict_sites.alc.filter(output)
-  return join(split(a:output, "\n")[39 :], "\n")
+  let compact_output = substitute(a:output, "\n\n", "\n", "g")
+  return join(split(compact_output, "\n")[39 :], "\n")
 endfunction
 
 " 上手くフィルタできない…
 function! g:ref_source_webdict_sites.weblio_ejje.filter(output)
   "return join(split(a:output, "\n")[53 :], "\n")
-  return join(split(a:output, "\n")[68 :], "\n")
+  let compact_output = substitute(a:output, "\n\n", "\n", "g")
+  return join(split(compact_output, "\n")[48 :], "\n")
+endfunction
+
+" 用例のみを出力
+function! g:ref_source_webdict_sites.weblio_ejje_examples.filter(output)
+  let examples_only = filter(copy(split(a:output, "\n")), 'v:val =~ "用例\\s"')
+  return join(examples_only, "\n")
 endfunction
 
 function! g:ref_source_webdict_sites.weblio_thesaurus.filter(output)
@@ -1322,6 +1332,8 @@ nnoremap <Space>kw    :<C-u>Ref webdict wikipedia:ja <C-R><C-W><CR><C-W><C-W>
 nnoremap <Space>kW    :<C-u>Ref webdict wikipedia:ja <C-R><C-A>
 nnoremap <Space>ke    :<C-u>Ref webdict weblio_ejje <C-R><C-W><CR><C-W><C-W>
 nnoremap <Space>kE    :<C-u>Ref webdict weblio_ejje <C-R><C-A>
+nnoremap <Space>kr    :<C-u>Ref webdict weblio_ejje_examples <C-R><C-W><CR><C-W><C-W>
+nnoremap <Space>kR    :<C-u>Ref webdict weblio_ejje_examples <C-R><C-A>
 nnoremap <Space>kt    :<C-u>Ref webdict weblio_thesaurus <C-R><C-W><CR><C-W><C-W>
 nnoremap <Space>kT    :<C-u>Ref webdict weblio_thesaurus <C-R><C-A>
 
