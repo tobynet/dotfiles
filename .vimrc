@@ -461,7 +461,7 @@ if has('gui_running')
     if has('gui_gtk2')
       set guifont=Ricty\ Diminished\ Discord\ 11
     else
-      set guifont=Ricty_Diminished_Discord:h12
+      set guifont=Ricty_Diminished_Discord:h14
     endif
     set linespace=0
     
