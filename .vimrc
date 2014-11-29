@@ -857,7 +857,7 @@ augroup memo
 "  autocmd Syntax markdown call s:set_my_syntax()
 "
   " Markdown from filetype.vim
-  autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,README.md set filetype=markdown
+  autocmd BufNewFile,BufRead *.markdown,*.mdown,*.md,*.mkd,*.mkdn,README.md set filetype=markdown
 augroup END
 
 function! s:filetype_markdown_init()
