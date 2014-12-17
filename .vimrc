@@ -175,7 +175,9 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
   NeoBundle 'tomtom/tcomment_vim'
 
   " web browser
-  NeoBundle 'yuratomo/w3m.vim'
+  if executable('w3m')
+    NeoBundle 'yuratomo/w3m.vim'
+  endif
 
   " Emmet
   NeoBundle 'mattn/emmet-vim'
