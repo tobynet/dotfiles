@@ -617,6 +617,14 @@ nnoremap <Space><Tab>   :<C-U>bnext<CR>
 nnoremap <Space><S-Tab> :<C-U>bprev<CR>
 " }}}
 "
+
+" ファイルタイプを List で得る
+" ref. http://superuser.com/questions/664638/list-all-filetype-plugins-known-to-vim
+function! g:Filetypes()
+    let paths = split(globpath(&rtp, 'ftplugin/*.vim'), '\n')
+    return map(paths, 'fnamemodify(v:val, ":t:r")')
+endfunction
+
 "----------------------------------------
 " タブ設定 {{{
 " タブ表示設定
@@ -836,14 +844,25 @@ let g:markdown_fenced_languages = [
   \ 'html', 'xhtml=html', 'css',
   \ 'diff',
   \ 'javascript', 'js=javascript', 'node=javascript',
-  \ 'coffee',
   \ 'zsh=sh', 'bash=sh',
   \ 'c', 'cpp', 
-  \ 'coq',
 \ ]
 "  \ 'bat=batchfile',
 "  \ 'go',
 
+" 存在するファイルタイプのみを追加
+" ※ 存在していないと markdown プラグインでファイル
+"   読み込み時にエラーが起きることがあるため)
+let s:temporary_markdown_fenced_languages = [
+  \ 'coq',
+  \ 'coffee',
+\ ]
+let filetypes_list = g:Filetypes()
+for lang in s:temporary_markdown_fenced_languages
+    if 0 <= index(filetypes_list, lang)
+        call add(g:markdown_fenced_languages, lang)
+    endif
+endfor
 
 "----------------------------------------
 " 自分のmemo用 {{{
