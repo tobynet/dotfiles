@@ -133,14 +133,13 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
 
   " for haskell
   " cabal install ghc-mod
-  " 
+  NeoBundleLazy 'eagletmt/ghcmod-vim'
 
   " yet another markdown plugin
   NeoBundle 'tpope/vim-markdown'
 
   " for indent visualization 
-  "NeoBundle 'nathanaelkane/vim-indent-guides'
-  NeoBundleLazy 'Yggdroot/indentLine'
+  NeoBundle 'Yggdroot/indentLine'
 
   " for markdown-preview
   " refs. http://mattn.kaoriya.net/software/vim/20120208161751.htm
@@ -341,11 +340,10 @@ set listchars=tab:»-,trail:~,eol:↲,extends:>,precedes:<,nbsp:%
 
 " vimの変更があったファイルの自動読み込み autoread http://vim-users.jp/2011/03/hack206/ /20m
 set autoread
+
 " 自動で読み込む頻度を上げるために、 :checktimeを適当な場面で発動させる
 augroup vimrc-checktime
   autocmd!
-  "Command-window でエラーがモードでの切り替えで出るのでやめ
-  "autocmd WinEnter,CursorHold,InsertEnter,InsertLeave * checktime
   autocmd WinEnter,CursorHold * checktime
 augroup END
 
@@ -364,6 +362,7 @@ augroup ForDifferentMode
   autocmd VimEnter,WinEnter,ColorScheme * call s:highlight_for_insert_mode()
   autocmd InsertEnter * call s:on_enter_insert_mode()
   autocmd InsertLeave * call s:on_leave_insert_mode()
+
   " CTRL-C の時にInsertLeaveが無視されるのを考慮する
   inoremap <c-c> <c-o>:<C-u>call <SID>on_leave_insert_mode()<CR><C-C>
 
@@ -381,22 +380,16 @@ augroup END
 " Insert Modeでどのように見せるか
 function! s:on_enter_insert_mode()
   set cursorline
-"  highlight Normal ctermbg=LightGrey
-"  highlight CursorLine ctermbg=NONE
 endfunction
 
 " Insert Mode「以外で」どのように見せるか
 function! s:on_leave_insert_mode()
   set nocursorline
-"  highlight Normal ctermbg=NONE
-"  highlight CursorLine ctermbg=grey
 endfunction
 
 function! s:highlight_for_insert_mode()
-  "highlight CursorLine ctermbg=grey
   highlight CursorLine ctermbg=lightgrey
 endfunction
-
 " }}}
 
 "-------------------------------------------------------------------------------
@@ -453,8 +446,7 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 
 " }}}
 
-" TIPS: :Paste か <Space>a でインデントを無視してペーストする 最後に"." のみの行で終了
-command! Paste append!
+" TIPS: :append! でインデントを無視してペーストする 最後に"." のみの行で終了 (<Space>a として定義)
 nnoremap <Space>a :<C-u>append!<CR>
 
 if has('gui_running')
@@ -484,41 +476,18 @@ augroup MyColor
 augroup END
 
 function! s:highlight_mycolor()
-    " gvimの背景を黄色っぽい感じにする 
-    " autocmdを避けてちらつきを避けてるけど、
-    " 参考: 背景: ffffdd(255, 255, 221) LightYellow が近い, 背景+vim cheatsheetの壁紙(暗め): eef1cd(rgb: 238, 241, 205) cornsilk2, LightYellow2
-    "highlight! Normal guibg=LightYellow1
-    " 暗い colorschemeでも明るくなるのでいったん止め
-    " highlight! Normal guibg=cornsilk1
-
-    
-    "highlight! MatchParen term=bold ctermbg=8 guibg=red
-    "highlight! MatchParen term=bold ctermbg=white guibg=white
     highlight! MatchParen ctermbg=white guibg=white
-    " TODO とか FIXED の類を見やすく
+
+    " TODO とか FIXED の類を見やすくしたい
     highlight! Todo term=bold cterm=bold ctermfg=white gui=bold guifg=white guibg=darkyellow
 
     highlight! Search term=standout cterm=NONE ctermbg=LightYellow
-
-    " vimdiff の白基調だと見づらいのでの修正
-    " refs.  https://github.com/altercation/vim-colors-solarized/blob/master/colors/solarized.vim
-    " highlight! DiffAdd    term=NONE cterm=NONE ctermfg=DarkGreen ctermbg=LightGreen guisp=DarkYellow
-    " highlight! DiffDelete term=NONE cterm=NONE ctermfg=DarkRed ctermbg=LightRed guisp=DarkYellow
-    " highlight! DiffDelete term=NONE cterm=NONE ctermfg=DarkRed ctermbg=LightRed guisp=DarkRed
-    " highlight! DiffText   term=NONE cterm=NONE ctermfg=DarkBlue ctermbg=LightBlue guisp=DarkBlue
 
     " high contrast
     highlight! DiffAdd    term=NONE cterm=NONE,reverse ctermfg=DarkGreen ctermbg=NONE
     highlight! DiffChange term=NONE cterm=NONE,reverse ctermfg=DarkYellow ctermbg=NONE
     highlight! DiffDelete term=NONE cterm=NONE,reverse ctermfg=DarkRed ctermbg=NONE
     highlight! DiffText   term=NONE cterm=NONE,reverse ctermfg=DarkBlue ctermbg=NONE
-    
-    " low contrast
-    " highlight! DiffAdd    term=NONE cterm=NONE,reverse ctermfg=DarkGreen ctermbg=NONE guisp=DarkGreen
-    " highlight! DiffChange term=NONE cterm=NONE,reverse ctermfg=DarkYellow ctermbg=NONE guisp=DarkYellow
-    " highlight! DiffDelete term=NONE cterm=NONE,reverse ctermfg=DarkRed ctermbg=NONE
-    " highlight! DiffText   term=NONE cterm=NONE,reverse ctermfg=DarkBlue ctermbg=NONE guisp=DarkBlue
-
 endfunction
 
 
@@ -540,17 +509,9 @@ nnoremap <Space>!    q:k<Cr>
 "   refs Vimの極め方 http://whileimautomaton.net/2008/08/vimworkshop3-kana-presentation
 nnoremap <Space>.    :<C-u>tabedit $MYVIMRC<CR>
 nnoremap <Space>.s   :<C-u>source $MYVIMRC<CR>
-nnoremap F5    :<C-u>tabedit $MYVIMRC<CR>
-nnoremap F6    :<C-u>source $MYVIMRC<CR>
 
 "強制全保存終了を無効化。
 nnoremap ZZ <Nop>
-"カーソルをj k では表示行で移動する。論理行移動は<C-n>,<C-p>
-"キーボードマクロには論理行移動を推奨。
-"nnoremap <Down> gj
-"nnoremap <Up>   gk
-"nnoremap j gj
-"nnoremap k gk
 
 " <Space>n で簡単に,今と同じファイルタイプで新規作成
 " refs https://github.com/ujihisa/config/commit/db02d2b89d38a273a28f61d2db364fe1349cb45f
@@ -560,12 +521,6 @@ function! s:new_with_the_filetype()
   new
   let &filetype = f
 endfunction
-
-" +でその場の数をインクリメント, -でデクリメント
-" 本来なら, CTRL-A, CTRL-X で出来る機能
-" ※誤爆するのでやっぱりコメントアウト
-"nnoremap <silent> + <C-A>
-"nnoremap <silent> - <C-X>
 " }}}
 
 " spellchecker 用 {{{
@@ -580,15 +535,9 @@ nnoremap <silent> <Space>sp :<C-u>setlocal spell! spelllang=en_us<CR>:setlocal s
 
 " coverage-vim 用 {{{
 command! -nargs=?   Coveragevim    :source coverage.vim
-" Coverage.vimの解除は :Uncov でできる
-""" <Space>c は他のに使いたいので一旦やめ
-"nnoremap <Space>c    :<C-u>so coverage.vim<CR>
-"nnoremap <Space>C    :<C-u>Uncov<CR>
+" TIPS: Coverage.vimの解除は :Uncov でできる
 " }}}
 
-"----------------------------------------
-" Vimスクリプト
-"----------------------------------------
 "ファイルを開いたら前回のカーソル位置へ移動 {{{
 augroup vimrcEx
   autocmd!
@@ -638,54 +587,11 @@ set showtabline=2
 " }}}
 
 
-" " 【タブごとにプロジェックと管理するために】 shougo's tabpagecd {{{
-" " Each tab has current directory
-" command! -bar -complete=dir -nargs=?
-"       \   CD
-"       \   TabpageCD <args>
-" command! -bar -complete=dir -nargs=?
-"       \   TabpageCD
-"       \   execute 'cd' fnameescape(expand(<q-args>))
-"       \   | let t:cwd = getcwd()
-" 
-" autocmd TabEnter *
-"       \   if exists('t:cwd') && !isdirectory(t:cwd)
-"       \ |     unlet t:cwd
-"       \ | endif
-"     \ | if !exists('t:cwd')
-"       \ |   let t:cwd = getcwd()
-"       \ | endif
-"     \ | execute 'cd' fnameescape(expand(t:cwd))
-
-" Exchange ':cd' to ':TabpageCD'.
-" cnoreabbrev <expr> cd (getcmdtype() == ':' && getcmdline() ==# 'cd') ? 'TabpageCD' : 'cd'
-
-"}}}
-
-
-" inspired by https://github.com/kana/vim-tabpagecd
-"autocmd TabEnter * if exists('t:cwd') | execute 'cd ' . fnameescape(t:cwd) | endif
-"autocmd TabLeave * let t:cwd = getcwd()
-
 "----------------------------------------
 " インデント設定 {{{
 " TIPS: insert mode: CTRL-T, CTRL-Dでインデント, アンインデント
 " TIPS: normal mode: >>, <<でインデント, アンインデント
-" x TabとShift+Tabでインデント、アンインデントしたい 
-" → CTRL-Iがつぶれてしまうのでやめ
-"  for insert mode
-"inoremap <TAB>    <C-T>  " これはたぶんいらない
-"inoremap <S-TAB>    <C-D>
-"  for normal mode
-" nnoremap <Tab>      >>
-" nnoremap <S-Tab>    <<
-"  for visual mode
-" vnoremap <Tab>      >gv
-" vnoremap <S-Tab>    <gv
-" visual modeで ">" や "<" でインデントすると選択が解除されるので,選択したままにする
-" ※ vimっぽく ">" や "<" の後に "." で繰り返す方がいいのかも
-vnoremap < <gv
-vnoremap > >gv
+" TIPS: ">" や "<" の後に "." でインデントを繰り返すことができる
 " }}}
 
 "----------------------------------------
@@ -704,16 +610,6 @@ command! -nargs=* -complete=file  Tailftab    :tabe <args> | setlocal autoread
 " TIPS: gcc, gCc    で現在行のコメントをトグル(tcommentプラグイン)
 " TIPS: gc{motion}  でコメントをトグル(tcommentプラグイン)
 " TIPS: Visualモードでgc  で選択範囲のコメントをトグル(tcommentプラグイン)
-
-" IDEっぽく ctrl-/ でコメントアウトする
-" <C-/> でなく <C-_> と指定しているのは、端末では ctrl-/ で <C-_> が送られるため 
-" noremap <silent> <C-_>      :TComment<CR>
-" vnoremap <silent> <C-_>     :TCommentMaybeInline<CR>
-" inoremap <silent> <C-_>     <C-O>:TComment<CR>
-
-" デフォルトのコメントアウトキーが <C-_> で前述の設定とかぶるので無効化
-" insert modeなどで使えないが <Leader>_ を代わりに使うといいと思う
-" let g:tcommentMapLeader1 = ''
 " }}}
 
 "----------------------------------------
@@ -721,8 +617,7 @@ command! -nargs=* -complete=file  Tailftab    :tabe <args> | setlocal autoread
 " TIPS: <C-P> or :CtrlP , CTRLPプラグインを起動して、ファイル等を検索
 " TIPS: <C-P> 後 <C-F> か <C-B>, CTRLPプラグイン使用中に、前者がファイル、後者がバッファとMRU
 " TIPS: <C-P> 後 <C-R> CTRLPプラグイン使用中に、正規表現検索モードへ
-
-" MRU の覚えておく 最大数を大きめにとっておく、遅くなるようなら小さめにする
+" 「最近使ったファイル」を最大数の大きめにとっておく、遅くなるようなら小さめにする
 let g:ctrlp_mruf_max = 25000
 
 " 固まらないように列挙するファイルを少なめにしておきたいところ
@@ -809,8 +704,7 @@ augroup END
 
 "----------------------------------------
 " coq ('trefis/coquille') {{{
-" available commands: :CoqNext :CoqToCursor :CoqUndo :CoqKill
-" and query commands are available: :Coq Check , :Coq Print
+" TIPS: coq: available commands: :CoqNext :CoqToCursor :CoqUndo :CoqKill and query commands are available: :Coq Check , :Coq Print
 
 augroup MyCoq
   autocmd!
@@ -824,12 +718,13 @@ augroup END
 " }}}
 
 "----------------------------------------
-" 日付用 {{{
-" 展開する
-"iabbrev <expr> today strftime("%Y-%m-%d")
-iabbrev <expr> dts strftime("%Y-%m-%d")
+" 日付の挿入用の補助用 {{{
+" TIPS: Insert mode で dts とすると、 2XXX-XX-XX と日付を挿入
+iabbrev <expr> dymd strftime("%Y-%m-%d")
 nnoremap <silent> <space>dd "=strftime("%Y-%m-%d")<cr>P<right>
-"inoremap <silent> <space>dd <C-R>=strftime("%Y-%m-%d")<cr>
+" TIPS: Insert mode で dts とすると、 2XXX-XX-XX と日付を挿入
+iabbrev <expr> dhm strftime("%H:%M")
+nnoremap <silent> <space>dt "=strftime("%H:%M")<cr>P<right>
 " }}}
 
 "----------------------------------------
@@ -1029,18 +924,6 @@ function! s:open_memo(options)
 endfunction
 " }}}
 
-" function! s:set_my_syntax()
-"     syntax match myTodo     '\(todo\):'
-"     syntax match myDone     '\(done\):'
-" 
-" "    highlight link myTodo      Todo
-" "    highlight link myDone      Error
-" "    highlight Todo term=bold cterm=bold ctermbg=yellow ctermfg=gray gui=bold guibg=yellow guifg=white
-" 
-"     hi def link myTodo Todo
-"     hi def myDone term=bold cterm=bold ctermbg=cyan ctermfg=white gui=bold guibg=cyan guifg=white
-" endfunction
-" }}}
 
 "----------------------------------------
 " 'vim-quickrun' でらくらく非同期で何かコマンドを実行 {{{
@@ -1073,10 +956,6 @@ let g:quickrun_config["_"] = {
 \ "runner/vimproc/updatetime" : 100,
 \ }
 
-" \ "outputter" : "error",
-" \ "outputter/buffer/split" : ":rightbelow 8sp",
-" \ "outputter/error/error" : "quickfix",
-" \ "outputter/error/success" : "buffer",
 
 " ruby で bundler を考慮する
 augroup quickrun_ruby_config
@@ -1124,23 +1003,7 @@ let g:quickrun_config['markdown/pandoc'] = {
     \ --template ~/dev/markdown/template/pandoc-templates/default.html5
     \',
 \ }
-"" }}}
-
-  "\ 'cmdopt':   '--standalone --self-contained
-    " \ --css ~/dev/markdown/template/bootswatch-page/readable/bootstrap.min.css 
-    " \ --css ~/dev/markdown/template/bootswatch-page/default/bootstrap-responsive.css 
-    " \ --css ~/dev/markdown/template/bootswatch-page/css/docs.css 
-    " \ --css ~/dev/markdown/template/my.css
-
-"    \ --template ~/dev/markdown/template/pandoc-templates/default.html5', 
-"  \ 'cmdopt':   '--standalone --self-contained --to=html5
-
-  " \ 'cmdopt':   '--to=html5 
-  "   \ --css ~/dev/markdown/template/simple-novel-style.css',
-"    \ 'outputter': 'buffer',
-"    \ "outputter" : "error",
-"    \ 'outputter': 'browser',
-"    \ 'exec': 'cd "%s:p:h" && %c --from=markdown --to=html %o %s %a',
+" }}}
 
 
 " vim-vspec 用コマンド {{{
@@ -1154,31 +1017,10 @@ command! -nargs=0 Vspec
 "nnoremap <Space>v    :<C-u>Vspec<CR>
 " }}}
 
-
-"----------------------------------------
-" vim-indent-guides用設定 {{{
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_guide_size = 1
-
-autocmd VimEnter,ColorScheme * call s:highlight_for_indent_guides()
-
-function! s:highlight_for_indent_guides()
-  highlight IndentGuidesOdd  ctermbg=white      guibg=white
-  highlight IndentGuidesEven ctermbg=lightgrey  guibg=lightgrey
-endfunction
-
-let g:indent_guides_enable_on_vim_startup = 1
-
-" }}}
-
 "----------------------------------------
 " Powerline 用コマンド {{{
-" let g:Powerline_symbols = 'fancy'
 let g:Powerline_symbols = 'unicode'
-"let g:Powerline_symbols = 'compatible'
-
 let g:Powerline_dividers_override = [ '', [0x2502], '', [0x2502]  ]
-"let g:Powerline_dividers_override = [ [0x2771], [0x276f], [0x2770], [0x276e]  ]
 " }}}
 
 
@@ -1469,28 +1311,6 @@ function! ToggleTodoStatus()
 endfunction
 " }}}
 
-"----------------------------------------
-"よく忘れるTIPS集
-"----------------------------------------
-" TIPS: ":execute !" や "call system" 用ならshellescape, :edit や :cd なら fnameescape を使ってエスケープすること
-" TIPS: 「*」「#」でカーソル下の単語で検索 便利!!!(#は*と逆方向)
-" TIPS: 「/」「?」で検索(?は/と方向が逆で, nで上方向を見ていく)
-" TIPS: 「yiw」でカーソル下の単語をヤンク
-" TIPS: gf や <c-w>f でカーソル下のファイルを開く
-" TIPS: ":noautocmd vimgrep" : vimgrepが遅い時はこれで
-" TIPS: {count}CTRL-^ で count 番目のbuffer list のファイルに移動
-" TIPS: Vimのリカバリ対処方法: * 読み込み専用(O): 中身を確認する時。他人がファイルを編集している時, * 復活させる(R): ファイルを復元したい時, * 削除する(D): ファイルを復元後。ファイル復元する必要がない時。, * 終了する(Q): 別のVimエディタで開いていることに気づいて開くのやめよう via Vimテクニックバイブル P76
-" TIPS: mV で カーソル位置をマーク, 'V でマーク位置を開く(viminfoが有る限り記憶)
-" TIPS: ]m で下方のメソッドの始まりへ移動。 ]M は終わりへ移動 (詳細は :help motion )
-" TIPS: [m で上方のメソッドの始まりへ移動。 [M は終わりへ移動 (詳細は :help motion )
-" TIPS: ]) で下方の閉じられていない ')' へ移動。 [} は '}' 版 (詳細は :help motion )
-" TIPS: [( で上方の閉じられていない '(' へ移動。 [{ は '{' 版 (詳細は :help motion )
-" TIPS: :setlocal autoread で tail -f のような挙動にする. refs. http://stackoverflow.com/questions/867721/tail-like-functionality-for-gvim
-
-command! Tips   noautocmd vimgrep /\ctips\:/g $MYVIMRC | cwindow
-" <Space>t でtipsを表示する 改行崩れる
-"nnoremap <Space>t    :noautocmd vimgrep /\ctips\:/g $MYVIMRC \| cwindow<CR>
-
 " template プラグイン {{{
 let g:template_basedir="~/dev/"
 
@@ -1510,29 +1330,31 @@ endfunction
 
 let g:rsenseHome = expand('~/.vim/bundle/rsense')
 
-" DONE: git忘れるので、すぐにコミットできるようにしたい 20m fugitive
-"
-" TODO: VimでIMの制御 /60m → gvimなら弄らなくてよさそう。CUIならskkとか？
-
-" TODO: 【起動が重くなったので】簡単にベンチマークとりたい
-"       vim -u NONE -U NONE  --startuptime ~/tmp/vim-startuptime.txt
-"       vim-ruby にrubyを認識させると起動に0.5秒かかる 
-"
-"           let g:ruby_path = "" 
-"
-"       で解決できるが補助機能が使えないっぽい
-"#<1')
-" TODO: 明日や昨日のメモを開きたい <space>m{+|-}
-" TODO: surround.vim を導入してテキストオブジェクト
-" DONE: vim-ref導入してrubyやphpのマニュアルを引きたい 30m/10m
-" TODO: vim-ref-html/vim-ref-html5/vim-ref-js /15m
-" TODO: vim-ref-jquery(オフライン) http://d.hatena.ne.jp/soh335/20110118/1295340856
-" TODO: 辞書から補完したい
-" TODO: 複数立ち上げたVimで履歴を共有できるようにしたい
-" TODO: vimにて、 一つ前の CTRL^ で一つ前のファイルを行き来するように、一つ前のファイル一つ後のファイルに移動したい
-
 set iminsert=1
 
+"----------------------------------------
+"よく忘れるTIPS集
+"----------------------------------------
+" TIPS: ":execute !" や "call system" 用ならshellescape, :edit や :cd なら fnameescape を使ってエスケープすること
+" TIPS: 「*」「#」でカーソル下の単語で検索 便利!!!(#は*と逆方向)
+" TIPS: 「/」「?」で検索(?は/と方向が逆で, nで上方向を見ていく)
+" TIPS: 「yiw」でカーソル下の単語をヤンク
+" TIPS: gf や <c-w>f でカーソル下のファイルを開く
+" TIPS: ":noautocmd vimgrep" : vimgrepが遅い時はこれで
+" TIPS: {count}CTRL-^ で count 番目のbuffer list のファイルに移動
+" TIPS: Vimのリカバリ対処方法: * 読み込み専用(O): 中身を確認する時。他人がファイルを編集している時, * 復活させる(R): ファイルを復元したい時, * 削除する(D): ファイルを復元後。ファイル復元する必要がない時。, * 終了する(Q): 別のVimエディタで開いていることに気づいて開くのやめよう via Vimテクニックバイブル P76
+" TIPS: mV で カーソル位置をマーク, 'V でマーク位置を開く(viminfoが有る限り記憶)
+" TIPS: ]m で下方のメソッドの始まりへ移動。 ]M は終わりへ移動 (詳細は :help motion )
+" TIPS: [m で上方のメソッドの始まりへ移動。 [M は終わりへ移動 (詳細は :help motion )
+" TIPS: ]) で下方の閉じられていない ')' へ移動。 [} は '}' 版 (詳細は :help motion )
+" TIPS: [( で上方の閉じられていない '(' へ移動。 [{ は '{' 版 (詳細は :help motion )
+" TIPS: :setlocal autoread で tail -f のような挙動にする. refs. http://stackoverflow.com/questions/867721/tail-like-functionality-for-gvim
+" Tipsを表示
+command! Tips   noautocmd vimgrep /\ctips\:/g $MYVIMRC | cwindow
+
+
+" ローカル環境用のファイルを読み込む
 if filereadable(expand('~/.vimrc_local'))
   source ~/.vimrc_local
 endif
+
