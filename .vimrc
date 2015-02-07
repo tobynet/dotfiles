@@ -997,6 +997,12 @@ if has('win32') || has('win64')
     \}
 endif
 
+" haskell用
+let g:quickrun_config['doctest'] = {
+  \ 'command':      'doctest',
+  \ 'exec':         '%c %s'
+\ }
+
 " markdown 出力
 let g:quickrun_config['markdown'] = {
   \ 'type':     'markdown/pandoc'
@@ -1227,6 +1233,17 @@ nnoremap <Space>kT    :<C-u>Ref webdict weblio_thesaurus <C-R><C-A>
 " he :diffsplit
 " e
 " vert diffsplit %.bk
+
+"----------------------------------------
+" Haskell関係の設定 {{{
+augroup my_haskell
+  autocmd!
+  autocmd FileType haskell call s:filetype_haskell_init()
+augroup END
+
+function! s:filetype_haskell_init()
+  nnoremap <buffer> <space>t    :<C-u>QuickRun doctest<CR>
+endfunction
 
 "----------------------------------------
 " python関係の設定 {{{
