@@ -134,6 +134,8 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
   " for haskell
   " cabal install ghc-mod
   NeoBundleLazy 'eagletmt/ghcmod-vim'
+  " vim-ref で hoogle を引くやつ: キー 'K' 
+  NeoBundle 'ujihisa/ref-hoogle'
 
   " yet another markdown plugin
   NeoBundle 'tpope/vim-markdown'
@@ -986,6 +988,14 @@ function! s:quickrun_ruby_config()
 endfunction
 
 let g:quickrun_config['ruby/bundle'] = { 'exec': 'bundle exec %c %o %s %a' }
+
+" Prevent corruption of output in Haskell
+if has('win32') || has('win64')
+    let g:quickrun_config['haskell'] = { 
+    \   "hook/output_encode/enable" : 1,
+    \   "hook/output_encode/encoding" : "cp932",
+    \}
+endif
 
 " markdown 出力
 let g:quickrun_config['markdown'] = {
