@@ -133,7 +133,7 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
 
   " for haskell
   " cabal install ghc-mod
-  NeoBundleLazy 'eagletmt/ghcmod-vim'
+  NeoBundle 'eagletmt/ghcmod-vim'
   " vim-ref で hoogle を引くやつ: キー 'K' 
   NeoBundle 'ujihisa/ref-hoogle'
 
