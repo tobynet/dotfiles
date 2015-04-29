@@ -1306,7 +1306,7 @@ augroup END
 abbreviate tl - todo:
 abbreviate tL - [ ] 
 " Press <Sapce>ta to insert a new todo
-nnoremap <Space>ta ^itodo: <ESC>
+nnoremap <Space>ta ^i* todo: <ESC>
 nnoremap <Space>tA ^i- [ ] <ESC>
 
 " Press <space>tt to toggle todos
