@@ -206,6 +206,9 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
 
   " Prolog support
   NeoBundle 'adimit/prolog.vim'
+  
+  " Outline
+  NeoBundle 'vim-scripts/VOoM'
 
   call neobundle#end()
 
