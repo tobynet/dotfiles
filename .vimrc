@@ -839,7 +839,7 @@ nnoremap <Space>I :<C-u>GrepMemo \c\[idea\]<left><left>
 " TODOのリストを開く {{{
 " 今のところは自分のファイルのTODOをすぐ確認するためだけ
 command! -nargs=?   Todos   noautocmd vimgrep /\ctodo\:/g % | cwindow
-nnoremap <Space>to :<C-u>Todos<CR>
+nnoremap <leader>tl :<C-u>Todos<CR>
 " }}}
 
 
@@ -1245,8 +1245,8 @@ augroup my_haskell
 augroup END
 
 function! s:filetype_haskell_init()
-  nnoremap <buffer> <space>t    :<C-u>QuickRun doctest<CR>
-  nnoremap <silent> <space>T    :<C-u>GhcModType<CR>
+  nnoremap <buffer> <space>tt    :<C-u>QuickRun doctest<CR>
+  nnoremap <silent> <space>tT    :<C-u>GhcModType<CR>
 endfunction
 
 "----------------------------------------
@@ -1306,15 +1306,15 @@ augroup END
 " 簡易todo処理 {{{
 " ref. http://naoty.hatenablog.com/entry/2013/04/28/002926
 
-" Press 'tl' and <SPACE> to insert a new todo
+" Press 'tl' and <leader>t to insert a new todo
 abbreviate tl - todo:
 abbreviate tL - [ ] 
-" Press <Sapce>ta to insert a new todo
-nnoremap <Space>ta ^i* todo: <ESC>
-nnoremap <Space>tA ^i- [ ] <ESC>
+" Press <leader>ta to insert a new todo
+nnoremap <leader>ta ^i* todo: <ESC>
+nnoremap <leader>tA ^i- [ ] <ESC>
 
-" Press <space>tt to toggle todos
-nnoremap <Space>tt :<C-u>call ToggleTodoStatus()<CR>
+" Press <leader>tt to toggle todos
+nnoremap <leader>tt :<C-u>call ToggleTodoStatus()<CR>
 
 " A Function for 
 function! ToggleTodoStatus()
