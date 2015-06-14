@@ -35,7 +35,6 @@ set guioptions-=T
 " カラー設定:
 " 共通の色テーマは.vimrcで指定すること
 " desert, molokai, solarized
-colorscheme desert
 
 " 何故か？？？vimrcのhighlight設定が読み込まれない？？？
 " コメントがちょっと暗めなので明るくしておく
