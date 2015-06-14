@@ -306,6 +306,10 @@ fi
 # for git
 [[ -e "$HOME/.zsh/git-aliases.zsh" ]] && source "$HOME/.zsh/git-aliases.zsh"
 
+# for gitignore
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+
 # TIPS: see oh-my-zsh cheatsheet https://github.com/robbyrussell/oh-my-zsh/wiki/Cheatsheet"
 
 # コマンドとコマンドの間に区切りを付ける
