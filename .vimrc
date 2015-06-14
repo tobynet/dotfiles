@@ -1246,6 +1246,7 @@ augroup END
 
 function! s:filetype_haskell_init()
   nnoremap <buffer> <space>t    :<C-u>QuickRun doctest<CR>
+  nnoremap <silent> <space>T    :<C-u>GhcModType<CR>
 endfunction
 
 "----------------------------------------
