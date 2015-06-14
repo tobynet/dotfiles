@@ -343,6 +343,11 @@ if [[ -d "$HOME/opt/sml/bin" ]]; then
     export PATH="$HOME/opt/sml/bin:$PATH"
 fi
 
+### For android studio
+if [[ -d "$HOME/opt/android-studio/bin" ]]; then
+    export PATH="$HOME/opt/android-studio/bin:$PATH"
+fi
+
 ### Added for ADT Bundle(Android SDK)
 # ref. http://note.chiebukuro.yahoo.co.jp/detail/n173086
 if [[ -d "$HOME/opt/adt-bundle/sdk" ]]; then
@@ -351,8 +356,8 @@ if [[ -d "$HOME/opt/adt-bundle/sdk" ]]; then
 fi
 
 # added by travis gem
-if [[ -d "$HOME/.travis/travis.sh" ]]; then
-    source $HOME/.travis/travis.sh
+if [[ -x "$HOME/.travis/travis.sh" ]]; then
+    source "$HOME/.travis/travis.sh"
 fi
 
 # Add for golang
@@ -360,4 +365,7 @@ if [[ -d "$HOME/.go/" ]]; then
     export GOPATH=$HOME/.go
     export PATH="$PATH:$GOPATH/bin"
 fi
+
+# OPAM configuration
+. "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null || true
 
