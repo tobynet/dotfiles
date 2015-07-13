@@ -510,9 +510,9 @@ endfunction
 " TIPS: <space>! で一つ前の外部コマンドを実行( 内部のは . だいたいで )
 nnoremap <Space>!    q:k<Cr>
 
-" TIPS: <Space>. .vimrcを開きつつ、リロード(覚えるのを1つだけにしたいため)
+" TIPS: <Space>.. .vimrcを開く。<space>.s で .vimrc を再読み込み
 "   refs Vimの極め方 http://whileimautomaton.net/2008/08/vimworkshop3-kana-presentation
-nnoremap <Space>.    :<C-u>tabedit $MYVIMRC<CR>
+nnoremap <Space>..    :<C-u>tabedit $MYVIMRC<CR>
 nnoremap <Space>.s   :<C-u>source $MYVIMRC<CR>
 
 "強制全保存終了を無効化。
