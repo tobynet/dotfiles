@@ -1242,11 +1242,23 @@ nnoremap <Space>kT    :<C-u>Ref webdict weblio_thesaurus <C-R><C-A>
 augroup my_haskell
   autocmd!
   autocmd FileType haskell call s:filetype_haskell_init()
+
+  autocmd BufWritePost *.hs,*.lhs GhcModCheckAndLintAsync
 augroup END
 
 function! s:filetype_haskell_init()
   nnoremap <buffer> <space>tt    :<C-u>QuickRun doctest<CR>
   nnoremap <silent> <space>tT    :<C-u>GhcModType<CR>
+  nnoremap <silent> <space>tl    :<C-u>GhcModCheckAndLintAsync<CR>
+  nnoremap <silent> <space><space> :<C-u>GhcModCheckAndLintAsync<CR>
+
+  " http://mattn.kaoriya.net/software/vim/20150209151638.htm
+  nnoremap <silent> <space>ht   :<C-u>GhcModType<CR>
+  nnoremap <silent> <space>hh   :<C-u>GhcModTypeClear<CR>
+  nnoremap <silent> <space>hT   :<C-u>GhcModTypeInsert<CR>
+  nnoremap <silent> <space>hc   :<C-u>SyntasticCheck ghc_mod<CR>:lopen<CR>
+  nnoremap <silent> <space>hl   :<C-u>SyntasticCheck hlint<CR>:lopen<CR>
+
 endfunction
 
 "----------------------------------------
