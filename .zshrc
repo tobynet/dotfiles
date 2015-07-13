@@ -118,6 +118,14 @@ zstyle ':chpwd:*' recent-dirs-max 5000
 zstyle ':chpwd:*' recent-dirs-default yes
 zstyle ':completion:*' recent-dirs-insert both
 
+# Vim for Linux Desktop(Fedora)
+# $ dnf install vim-x11
+# ref http://vi.stackexchange.com/questions/2063/how-do-i-get-clipboard-support-in-fedora-20
+if [[ -x "$(which vimx)" ]] ; then
+    alias vi='vimx'
+    alias vim='vimx'
+fi
+
 
 # for gisty
 export GISTY_DIR="$HOME/dev/gists"
