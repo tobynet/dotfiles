@@ -1,6 +1,7 @@
 
 -- :!chcp 65001
 -- :set prompt "λ: "
+:set prompt "> "
 
 :set +t
 :set +s
