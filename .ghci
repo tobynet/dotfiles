@@ -1,0 +1,23 @@
+
+-- :!chcp 65001
+-- :set prompt "λ: "
+
+:set +t
+:set +s
+:set +m
+
+:def hlint const . return $ ":! hlint \"src\""
+:def hoogle \s -> return $ ":! hoogle --count=15 \"" ++ s ++ "\""
+
+import Control.Applicative
+import Control.Monad
+import Control.Concurrent
+import Control.Concurrent.Async
+import Control.Parallel
+
+import Data.String
+import Data.Char
+import Data.List
+import Data.Monoid
+-- import Control.Monad.IO.Class
+
