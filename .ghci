@@ -9,6 +9,9 @@
 :set +s
 :set +m
 
+-- To use [ x+y | x <- Just 1, y <- Just 2 ]
+:set -XMonadComprehensions
+
 :def hlint const . return $ ":! hlint \"src\""
 :def hoogle \s -> return $ ":! hoogle --count=15 \"" ++ s ++ "\""
 
