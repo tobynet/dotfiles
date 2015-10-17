@@ -1,4 +1,6 @@
 
+-- ref.http://dev.stephendiehl.com/hask/#ghci
+
 -- :!chcp 65001
 -- :set prompt "λ: "
 :set prompt "> "
