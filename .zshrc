@@ -377,3 +377,7 @@ fi
 # OPAM configuration
 . "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null || true
 
+# Added for Anaconda
+if [[ -d "$HOME/opt/anaconda3/bin" ]]; then
+    export PATH="$HOME/opt/anaconda3/bin:$PATH"
+fi
