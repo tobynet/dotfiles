@@ -379,5 +379,5 @@ fi
 
 # Added for Anaconda
 if [[ -d "$HOME/opt/anaconda3/bin" ]]; then
-    export PATH="$HOME/opt/anaconda3/bin:$PATH"
+    export PATH="$PATH:$HOME/opt/anaconda3/bin"
 fi
