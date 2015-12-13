@@ -84,6 +84,7 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
   " python:     $ sudo pip install flake8
   " yaml:       $ sudo npm install -g js-yaml
   " javascript: $ sudo npm install -g jshint
+  " golang(golint)  $ go get -u github.com/golang/lint/golint
   NeoBundle 'scrooloose/syntastic'
 
   " ★★★like rspec
