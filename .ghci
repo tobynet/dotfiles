@@ -24,8 +24,7 @@
 :set -XParallelListComp
 
 :def hlint const . return $ ":! hlint \"src\""
-:def hoogle \s -> return $ ":! hoogle --count=10 \"" ++ s ++ "\""
-:def doc \s -> return $ ":! hoogle --info \"" ++ s ++ "\""
+:def hoogle \s -> return $ ":! hoogle --count=15 \"" ++ s ++ "\""
 
 import Control.Applicative
 import Control.Monad
