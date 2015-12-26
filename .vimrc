@@ -350,7 +350,7 @@ set autoread
 " 自動で読み込む頻度を上げるために、 :checktimeを適当な場面で発動させる
 augroup vimrc-checktime
   autocmd!
-  autocmd WinEnter,CursorHold * checktime
+  autocmd WinEnter * checktime
 augroup END
 
 "----------------------------------------
