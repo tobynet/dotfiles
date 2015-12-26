@@ -1252,7 +1252,7 @@ augroup END
 
 function! s:filetype_haskell_init()
   " Easy to use doctest in Haskell mode
-  inoremap <buffer> <C-t>        <C-[>:QuickRun doctest
+  inoremap <buffer> <C-t>        <C-[>:QuickRun doctest<CR>
   nnoremap <buffer> <C-t>        :<C-u>QuickRun doctest<CR>
 
   nnoremap <buffer> <space>tt    :<C-u>QuickRun doctest<CR>
