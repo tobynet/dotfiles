@@ -1251,6 +1251,10 @@ augroup my_haskell
 augroup END
 
 function! s:filetype_haskell_init()
+  " Easy to use doctest in Haskell mode
+  inoremap <buffer> <C-t>        <C-[>:QuickRun doctest
+  nnoremap <buffer> <C-t>        :<C-u>QuickRun doctest<CR>
+
   nnoremap <buffer> <space>tt    :<C-u>QuickRun doctest<CR>
   nnoremap <silent> <space>tT    :<C-u>GhcModType<CR>
   nnoremap <silent> <space>tl    :<C-u>GhcModCheckAndLintAsync<CR>
@@ -1262,6 +1266,8 @@ function! s:filetype_haskell_init()
   nnoremap <silent> <space>hT   :<C-u>GhcModTypeInsert<CR>
   nnoremap <silent> <space>hc   :<C-u>SyntasticCheck ghc_mod<CR>:lopen<CR>
   nnoremap <silent> <space>hl   :<C-u>SyntasticCheck hlint<CR>:lopen<CR>
+
+  setl fileformat=unix
 
 endfunction
 
