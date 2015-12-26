@@ -16,6 +16,13 @@
 -- Just 3
 :set -XMonadComprehensions
 
+-- | To use Parallel List Comprehensions
+--
+-- e.g.
+-- >>> [ x + y | x <- [1,2,3] | y <- [10,20,30] ]
+-- [11,22,33]
+:set -XParallelListComp
+
 :def hlint const . return $ ":! hlint \"src\""
 :def hoogle \s -> return $ ":! hoogle --count=10 \"" ++ s ++ "\""
 :def doc \s -> return $ ":! hoogle --info \"" ++ s ++ "\""
