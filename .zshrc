@@ -381,3 +381,12 @@ fi
 if [[ -d "$HOME/opt/anaconda3/bin" ]]; then
     export PATH="$PATH:$HOME/opt/anaconda3/bin"
 fi
+
+# For stack on haskell
+# refs. http://docs.haskellstack.org/en/stable/shell_autocompletion.html
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+
+if which stack >/dev/null 2>&1 ; then
+    eval "$(stack --bash-completion-script stack)"
+fi
