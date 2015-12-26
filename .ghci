@@ -9,7 +9,11 @@
 :set +s
 :set +m
 
--- To use [ x+y | x <- Just 1, y <- Just 2 ]
+-- | To use Monad Comprehensions
+--
+-- e.g.
+-- >>> [ x + y | x <- Just 1, y <- Just 2 ]
+-- Just 3
 :set -XMonadComprehensions
 
 :def hlint const . return $ ":! hlint \"src\""
