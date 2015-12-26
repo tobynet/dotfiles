@@ -792,6 +792,12 @@ function! s:filetype_markdown_init()
     autocmd BufWinLeave <buffer> silent call CloseMarkdown()
     autocmd BufWinEnter <buffer> silent call OpenMarkdown()
   endif
+
+  " For tpope/vim-markdown plugin.
+  " Deal with a case of diffucult to edit invisible markups on bold text or italic it.
+  "
+  " Humm...? 
+  setl conceallevel=0
 endfunction
 
 
