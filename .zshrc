@@ -79,11 +79,6 @@ export PERL_CPANM_OPT="--local-lib=~/perl5"
 #export PATH=$HOME/perl5/bin:$PATH;
 export PERL5LIB=$HOME/perl5/lib/perl5:$PERL5LIB;
 
-add-zsh-hook precmd  z_precmd
-function z_precmd () {
-  _z --add "$(pwd -P)"
-}
-
 # 履歴を補完に使いたいので、可能な限り履歴数を増やしたい
 HISTSIZE=1000000
 SAVEHIST=1000000
