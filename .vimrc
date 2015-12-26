@@ -106,6 +106,9 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
   " for javascript indent
   NeoBundle 'pangloss/vim-javascript'
 
+  " for golang
+  NeoBundle 'fatih/vim-go'
+
   " 自動的に 括弧や do end を閉じる 
   " lua, ruby, sh, zsh, vb, vbnet, vim 辺りに対応してる
   " refs. http://d.hatena.ne.jp/babie/20110130/1296348755
@@ -1314,6 +1317,15 @@ augroup my_prolog
   " Reassign filetype some file extension as prolog
   autocmd BufRead,BufNewFile *.pro,*.swi set filetype=prolog
 augroup END
+
+"----------------------------------------
+" For golang {{{
+augroup my_golang
+    " ref. http://yuroyoro.hatenablog.com/entry/2014/08/12/144157
+    autocmd FileType go :highlight goErr cterm=bold ctermfg=214
+    autocmd FileType go :match goErr /\<err\>/
+augroup END
+" }}}
 
 "----------------------------------------
 " 簡易todo処理 {{{
