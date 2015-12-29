@@ -93,6 +93,9 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
   " special looks statusbar
   NeoBundle 'Lokaltog/vim-powerline'
 
+  " Better surround
+  NeoBundle 'tpope/vim-surround'
+
   " for git
   NeoBundle 'tpope/vim-fugitive'
   " for git diff like IDE
