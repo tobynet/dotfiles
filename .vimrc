@@ -1268,6 +1268,10 @@ function! s:filetype_haskell_init()
   nnoremap <silent> <F1>   :<C-u>GhcModType<CR>
   nnoremap <silent> <F2>   :<C-u>GhcModTypeClear<CR>
   nnoremap <silent> <F3>   :<C-u>GhcModTypeInsert<CR>
+  nnoremap <silent> <space><space>  :<C-u>GhcModType<CR>
+  nnoremap <silent> <space>1        :<C-u>GhcModType<CR>
+  nnoremap <silent> <space>2        :<C-u>GhcModTypeClear<CR>
+  nnoremap <silent> <space>3        :<C-u>GhcModTypeInsert<CR>
   inoremap <silent> <F1>   <C-[>:GhcModType<CR>
   inoremap <silent> <F2>   <C-[>:GhcModTypeClear<CR>
   inoremap <silent> <F3>   <C-[>:GhcModTypeInsert<CR>
@@ -1275,7 +1279,6 @@ function! s:filetype_haskell_init()
   nnoremap <buffer> <space>tt    :<C-u>QuickRun doctest<CR>
   nnoremap <silent> <space>tT    :<C-u>GhcModType<CR>
   nnoremap <silent> <space>tl    :<C-u>GhcModCheckAndLintAsync<CR>
-  nnoremap <silent> <space><space> :<C-u>GhcModCheckAndLintAsync<CR>
 
   " http://mattn.kaoriya.net/software/vim/20150209151638.htm
   nnoremap <silent> <space>ht   :<C-u>GhcModType<CR>
