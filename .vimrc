@@ -1263,6 +1263,14 @@ function! s:filetype_haskell_init()
   " Easy to use doctest in Haskell mode
   inoremap <buffer> <C-t>        <C-[>:QuickRun doctest<CR>
   nnoremap <buffer> <C-t>        :<C-u>QuickRun doctest<CR>
+  
+  " Easy to use doctest in Haskell mode
+  nnoremap <silent> <F1>   :<C-u>GhcModType<CR>
+  nnoremap <silent> <F2>   :<C-u>GhcModTypeClear<CR>
+  nnoremap <silent> <F3>   :<C-u>GhcModTypeInsert<CR>
+  inoremap <silent> <F1>   <C-[>:GhcModType<CR>
+  inoremap <silent> <F2>   <C-[>:GhcModTypeClear<CR>
+  inoremap <silent> <F3>   <C-[>:GhcModTypeInsert<CR>
 
   nnoremap <buffer> <space>tt    :<C-u>QuickRun doctest<CR>
   nnoremap <silent> <space>tT    :<C-u>GhcModType<CR>
