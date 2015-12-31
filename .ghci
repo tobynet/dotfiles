@@ -3,10 +3,15 @@
 
 -- :!chcp 65001
 -- :set prompt "λ: "
-:set prompt "> "
 
+-- For default prompt
+:set prompt "ラムダ> "
+-- For in multiline
+:set prompt2 "ラムダ| "
+
+-- Show help of function
 :set +t
-:set +s
+-- Allow multiline without using :{ and :}
 :set +m
 
 -- | To use Monad Comprehensions
@@ -24,7 +29,12 @@
 :set -XParallelListComp
 
 :def hlint const . return $ ":! hlint \"src\""
-:def hoogle \s -> return $ ":! hoogle --count=15 \"" ++ s ++ "\""
+
+-- Show list of functions
+:def hoogle \s -> return $ ":! hoogle --count=10 \"" ++ s ++ "\""
+
+-- Show help of a function
+:def doc \s -> return $ ":! hoogle --info \"" ++ s ++ "\""
 
 import Control.Applicative
 import Control.Monad
@@ -38,3 +48,6 @@ import Data.List
 import Data.Monoid
 -- import Control.Monad.IO.Class
 
+-- Show timing/memory
+-- Set it at last line to suppress some printings of timing/memory
+:set +s
