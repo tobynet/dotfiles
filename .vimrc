@@ -178,7 +178,10 @@ if isdirectory(expand('~/.vim/bundle/neobundle.vim/'))
   " NeoBundle 'trinity.vim'
   " NeoBundle 'taglist.vim'
   " NeoBundle 'Source-Explorer-srcexpl.vim'
-  " 
+
+  " tag tree window
+  NeoBundle 'majutsushi/tagbar'
+
   " easy to add comment
   NeoBundle 'tomtom/tcomment_vim'
 
@@ -1351,6 +1354,17 @@ augroup my_golang
     autocmd FileType go :highlight goErr cterm=bold ctermfg=214
     autocmd FileType go :match goErr /\<err\>/
 augroup END
+" }}}
+
+"----------------------------------------
+" For tagbar plugin {{{
+"
+" Shortcut of tagbar
+nmap <leader>= :<C-u>TagbarToggle<CR>
+nmap <F8> :<C-u>TagbarToggle<CR>
+
+" Move focus on show tagbar
+let g:tagbar_autofocus = 1
 " }}}
 
 "----------------------------------------
