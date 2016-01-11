@@ -1,3 +1,4 @@
+putStr "Loading ~/.ghci ..."
 
 -- ref.http://dev.stephendiehl.com/hask/#ghci
 
@@ -51,3 +52,6 @@ import Data.Monoid
 -- Show timing/memory
 -- Set it at last line to suppress some printings of timing/memory
 :set +s
+
+putStrLn "done!"
+
