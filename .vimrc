@@ -1327,6 +1327,7 @@ endfunction
 augroup my_ruby
   autocmd!
   autocmd FileType ruby call s:filetype_ruby_init()
+  autocmd FileType yaml call s:filetype_ruby_init()
 augroup END
 
 function! s:filetype_ruby_init()
