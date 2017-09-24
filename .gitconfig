@@ -1,6 +1,6 @@
 [user]
 	name = tobynet
-	email = toby.net.info.mail+git@gmail.com
+	email = toby.netinfo+git@gmail.com
 [include]
     path = .gitconfig.local
 [core]
@@ -10,6 +10,7 @@
     # http://stackoverflow.com/questions/136178/git-diff-handling-long-lines
     pager = less -r
     quotepath = false
+    autocrlf = false
 [apply]
     whitespace = nowarn
 [color]
@@ -92,3 +93,5 @@
 [diff]
     tool = vimdiff
 #    external = ~/bin/git_diff_wrapper.sh
+[credential]
+    helper = manager
