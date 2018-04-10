@@ -407,3 +407,8 @@ autoload -U +X bashcompinit && bashcompinit
 if which stack >/dev/null 2>&1 ; then
     eval "$(stack --bash-completion-script stack)"
 fi
+
+
+if [[ -d "$HOME/.cargo/bin" ]]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
