@@ -391,12 +391,6 @@ if [[ -x "$HOME/.travis/travis.sh" ]]; then
     source "$HOME/.travis/travis.sh"
 fi
 
-# Add for golang
-if [[ -d "$HOME/.go/" ]]; then
-    export GOPATH=$HOME/.go
-    export PATH="$PATH:$GOPATH/bin"
-fi
-
 # OPAM configuration
 . "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null || true
 
