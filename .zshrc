@@ -312,6 +312,11 @@ function zmvhelp(){
 #   - man zshexpn , http://zsh.sourceforge.net/Doc/Release/Expansion.html#SEC69
 #   - man zshcontrib, http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#SEC291
 
+# date command for file with seconds
+# tips: ex. $ echo "foo_$(datef).txt"  -> foo_2018-06-03_12-34-56.txt
+# tips: ex. $ zcpn "foo/*.sav" "backups/*_$(datef).sav"
+alias datef="date +'%Y-%m-%d_%H-%M-%S'"
+
 # like xargs
 autoload zargs
 
