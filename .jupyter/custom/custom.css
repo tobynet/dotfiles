@@ -1,0 +1,4 @@
+/* Cancel the italic css in code highlighting */
+.cm-s-ipython span.cm-comment {
+  font-style: initial !important;
+}
