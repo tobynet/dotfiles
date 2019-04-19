@@ -91,7 +91,7 @@ plugins+=(z)                        # easy to jump directory https://github.com/
 # custom plugins
 plugins+=(show-buffer-stack)        # show previous command when stack command with Ctrl-Q 
 
-source $ZSH/oh-my-zsh.sh
+[[ -e $ZSH/oh-my-zsh.sh ]] && source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=$HOME/perl5/bin:$HOME/.cabal/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
@@ -127,6 +127,9 @@ alias ls='ls --all --reverse --sort=time --human-readable --time-style=long-iso 
 # 指定秒以上まったら、経過秒を報告する
 REPORTTIME=3
 
+# 最低限の色付け
+autoload -Uz colors && colors
+
 # 最近のディレクトリに移動する(zsh 4.3.15以降？)
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
@@ -145,9 +148,6 @@ fi
 # Easy to use zsh's history
 alias h=history
 alias hh='history | grep -Pi'
-
-# for gisty
-export GISTY_DIR="$HOME/dev/gists"
 
 # for syntax highlight
 alias c='pygmentize -O bg=dark -g'
@@ -226,8 +226,6 @@ alias -g HEXC='| hexdump -c'    # バイナリを16進数表示 文字をその�
 alias -g BIN='| od -tx1z -Ax'   # 改行コードや表示不可文字を表示
 alias -g BINC='|  od -tx1c -Ax' # 下に並べて表示 表示不可文字が8進数になるのがよくわからない
 
-# for anything dump
-[[ -e $HOME/.zsh/aump.zsh ]] && source $HOME/.zsh/aump.zsh
 
 # tips: curl http://example.com/ W でhtmlとしてw3mで開く(W3Mでも可能)
 alias -g W="| w3m -T text/html"
@@ -320,21 +318,6 @@ alias datef="date +'%Y-%m-%d_%H-%M-%S'"
 # like xargs
 autoload zargs
 
-# zaw - zsh anything.el-like widget
-# https://github.com/zsh-users/zaw
-# TIPS: Ctrl-X ; to anything.el-like widget via zaw
-if [[ -e $HOME/.zsh/zaw/zaw.zsh ]]; then
-  source $HOME/.zsh/zaw/zaw.zsh
-
-  # TIPS: Ctrl-X ; to anything.el-like widget via zaw
-  # replace CTRL-R
-  bindkey '^R' zaw-history
-
-  # TIPS: CTRL-@ でディレクトリ移動
-  # [zaw.zshで最近移動したディレクトリに移動する - $shibayu36->blog;](http://shibayu36.hatenablog.com/entry/20120130/1327937835)
-  zstyle ':filter-select' case-insensitive yes # 絞り込みをcase-insensitiveに
-  bindkey '^@' zaw-cdr # zaw-cdrをbindkey
-fi
 
 # for vagrant
 [[ -e "$HOME/.zsh/vagrant.zsh" ]] && source "$HOME/.zsh/vagrant.zsh"
@@ -342,16 +325,13 @@ fi
 # for git
 [[ -e "$HOME/.zsh/git-aliases.zsh" ]] && source "$HOME/.zsh/git-aliases.zsh"
 
-# for gitignore
-function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
-
 
 # TIPS: see oh-my-zsh cheatsheet https://github.com/robbyrussell/oh-my-zsh/wiki/Cheatsheet"
 
 # コマンドとコマンドの間に区切りを付ける
 # Add separating line between commands
 # cf. oh-my-zsh af-magic theme https://github.com/robbyrussell/oh-my-zsh/blob/master/themes/af-magic.zsh-theme
-if [[ ! ( $PROMPT =~ '-----------------------------------------' ) ]]; then
+if [[ -e $ZSH/oh-my-zsh.sh ]] && [[ ! ( $PROMPT =~ '-----------------------------------------' ) ]]; then
     PROMPT='$FG[237]------------------------------------------------------------%{$reset_color%}
 '"$PROMPT"
 fi
