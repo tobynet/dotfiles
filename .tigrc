@@ -1,4 +1,4 @@
-set line-graphics = true         # show graphics
+set line-graphics = ascii
 
 set main-view = \
     date:local=true \
@@ -10,7 +10,7 @@ set blame-view = date \
     author:abbreviated \
     file-name:auto \
     id:true,color \
-    line-number:true,interval=5 text
+    line-number:true,interval=1 text
 
 set tree-view = \
     line-number:no,interval=5 \
