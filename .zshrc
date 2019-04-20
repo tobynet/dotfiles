@@ -270,18 +270,18 @@ alias ghcd=githubcd
 autoload -Uz zmv
 # こんな感じに簡単にかけるようなalias
 # tips: $ zmv *.txt mage-*.txt, zmv
-# -w: カッコ省略できるように
-#   $ zmv '(*)_(*).txt' 'mage-$1_$2.txt'
-#     ↓
-#   $ zmv '*_*.txt' 'mage-$1_$2.txt'
-# -W: $数値を省略できるように
-#   $ zmv '*_*.txt' 'mage-$1_$2.txt'
-#     ↓
-#   $ zmv '*_*.txt' 'mage-*_*.txt'
-# noglob: zshのワイルドカード展開を切れば''が要らなくなる
-#   $ zmv '*_*.txt' 'mage-*_*.txt'
-#     ↓
-#   $ zmv *_*.txt mage-*_*.txt
+# tips: -w: カッコ省略できるように
+# tips:   $ zmv '(*)_(*).txt' 'mage-$1_$2.txt'
+# tips:     ↓
+# tips:   $ zmv '*_*.txt' 'mage-$1_$2.txt'
+# tips: -W: $数値を省略できるように
+# tips:   $ zmv '*_*.txt' 'mage-$1_$2.txt'
+# tips:     ↓
+# tips:   $ zmv '*_*.txt' 'mage-*_*.txt'
+# tips: noglob: zshのワイルドカード展開を切れば''が要らなくなる
+# tips:   $ zmv '*_*.txt' 'mage-*_*.txt'
+# tips:     ↓
+# tips:   $ zmv *_*.txt mage-*_*.txt
 alias zmv='noglob zmv -W'
 #  tips: zmv -n: 実行せずに表示だけ(実行前の確認用)
 alias zmv-dryrun='noglob zmv -n -W'
