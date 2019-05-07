@@ -85,6 +85,8 @@
     #cdroot = !"cd $(git rev-parse --show-toplevel)" # cdは駄目っぽい
     # detail log
     wp = whatchanged -p
+    aliases = config --get-regexp ^alias
+    alias = aliases
 [gui]
     encoding = utf-8
 [i18n]
