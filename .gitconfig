@@ -1,6 +1,6 @@
 [user]
-	name = tobynet
-	email = toby.netinfo+git@gmail.com
+    name = tobynet
+    email = toby.netinfo+git@gmail.com
 [include]
     path = .gitconfig.local
 [core]
@@ -18,18 +18,10 @@
     status = auto
     branch = auto
     interactive = auto
-	ui = true
+    ui = true
 [push]
     # push only the current branch
     default = tracking
-#[branch]
-#    autosetuprebase = always
-[merge]
-    # default 'git merge --no-ff'  # from 1.7.6
-    ff = false
-[pull]
-    # default 'git pull --rebase' # from 1.7.9
-    rebase = true
 [alias]
     l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai) %C(bold blue)<%an>%Creset' --abbrev-commit
     la = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai) %C(bold blue)<%an>%Creset' --abbrev-commit --all
@@ -76,12 +68,12 @@
     branch-new = checkout -b
     branch-all = branch -a
     gitk-bg = !"gitk HEAD --not $(git rev-parse --remotes) &"
-  # See http://stackoverflow.com/questions/53569/how-to-get-the-changes-on-a-branch-in-git
-  #branch-name = !git branch 2>/dev/null | GREP_OPTIONS= grep -e ^* | tr -d '* '
-  branch-name = !git for-each-ref --format='%(refname:short)' $(git symbolic-ref HEAD)
-  branch-rename = !git branch -m `git branch-name` $1
+    # See http://stackoverflow.com/questions/53569/how-to-get-the-changes-on-a-branch-in-git
+    # branch-name = !git branch 2>/dev/null | GREP_OPTIONS= grep -e ^* | tr -d '* '
+    branch-name = !git for-each-ref --format='%(refname:short)' $(git symbolic-ref HEAD)
+    branch-rename = !git branch -m `git branch-name` $1
     merge-no-ff = merge --no-ff
-#  merge-rebase = !git rebase 
+    #  merge-rebase = !git rebase 
     #cdroot = !"cd $(git rev-parse --show-toplevel)" # cdは駄目っぽい
     # detail log
     wp = whatchanged -p
