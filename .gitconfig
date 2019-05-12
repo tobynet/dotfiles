@@ -25,30 +25,28 @@
 [alias]
     l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai) %C(bold blue)<%an>%Creset' --abbrev-commit
     la = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai) %C(bold blue)<%an>%Creset' --abbrev-commit --all
-    ll = log --graph --date=iso --decorate
-    lla = log --graph --date=iso --decorate --all
-    lp = log --graph --date=iso --decorate -p
-    lpa = log --graph --date=iso --decorate --all -p
-    lo = log --graph --date=iso --decorate --oneline
-    loa = log --graph --date=iso --decorate --oneline --all
+    ll = log --graph --date=iso --decorate --stat
+    lla = log --graph --date=iso --decorate --all --stat
+    lp = log --graph --date=iso --decorate -p --stat
+    lpa = log --graph --date=iso --decorate --all -p --stat
 
     # Log for modified files (with add, deleted, renamed...)
-    lM = l --diff-filter=AMDR --summary --
-    laM = la --diff-filter=AMDR --summary --
-    llM = ll --diff-filter=AMDR --summary --
-    llaM = lla --diff-filter=AMDR --summary --
+    lM = l --diff-filter=AMDR --
+    laM = la --diff-filter=AMDR --
+    llM = ll --diff-filter=AMDR --
+    llaM = lla --diff-filter=AMDR --
 
     # Log for deleted files (with renamed)
-    lD = l --diff-filter=DR --summary --
-    laD = la --diff-filter=DR --summary --
-    llD = ll --diff-filter=DR --summary --
-    llaD = lla --diff-filter=DR --summary --
+    lD = l --diff-filter=DR --
+    laD = la --diff-filter=DR --
+    llD = ll --diff-filter=DR --
+    llaD = lla --diff-filter=DR --
     
     # Log for added files (with renamed)
-    lA = l --diff-filter=AR --summary --
-    laA = la --diff-filter=AR --summary --
-    llA = ll --diff-filter=AR --summary --
-    llaA = lla --diff-filter=AR --summary --
+    lA = l --diff-filter=AR --
+    laA = la --diff-filter=AR --
+    llA = ll --diff-filter=AR --
+    llaA = lla --diff-filter=AR --
 
     # List modified files only(without deleted fiels)  $from_id $to_id $dir/
     ls = diff --diff-filter=ACMR --name-only 
