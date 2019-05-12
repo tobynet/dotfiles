@@ -29,15 +29,8 @@
     lla = log --graph --date=iso --decorate --all
     lp = log --graph --date=iso --decorate -p
     lpa = log --graph --date=iso --decorate --all -p
-#    lp = 
-#    l = log --graph --date=iso --decorate
-#    la = log --graph --date=iso --decorate --all
     lo = log --graph --date=iso --decorate --oneline
     loa = log --graph --date=iso --decorate --oneline --all
-#    ll = log --graph --date=short --pretty=format:\"%Cgreen%h%d %cd %Cred%cn %Creset%s\" --decorate
-#    lla = log --graph --date=short --pretty=format:\"%Cgreen%h%d %cd %Cred%cn %Creset%s\" --decorate --all
-#    ll = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-#    lla = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
     co = checkout
     cob = checkout -b 
     st = status --untracked-files=all --short --branch
