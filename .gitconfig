@@ -31,6 +31,25 @@
     lpa = log --graph --date=iso --decorate --all -p
     lo = log --graph --date=iso --decorate --oneline
     loa = log --graph --date=iso --decorate --oneline --all
+
+    # Log for modified files (with add, deleted, renamed...)
+    lM = l --diff-filter=AMDR --summary --
+    laM = la --diff-filter=AMDR --summary --
+    llM = ll --diff-filter=AMDR --summary --
+    llaM = lla --diff-filter=AMDR --summary --
+
+    # Log for deleted files (with renamed)
+    lD = l --diff-filter=DR --summary --
+    laD = la --diff-filter=DR --summary --
+    llD = ll --diff-filter=DR --summary --
+    llaD = lla --diff-filter=DR --summary --
+    
+    # Log for added files (with renamed)
+    lA = l --diff-filter=AR --summary --
+    laA = la --diff-filter=AR --summary --
+    llA = ll --diff-filter=AR --summary --
+    llaA = lla --diff-filter=AR --summary --
+
     co = checkout
     cob = checkout -b 
     st = status --untracked-files=all --short --branch
