@@ -72,9 +72,8 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=(git)
 #
 #### my plugin setting ####
-plugins+=(ruby gem rake thor rbenv rails)
+plugins+=(ruby gem rake rbenv rails)
 plugins+=(bundler)                # for ruby http://gembundler.com/
-plugins+=(cap)                    # capistrano  https://github.com/capistrano/capistrano
 plugins+=(command-not-found)
 plugins+=(tmux)                 # for tmux
 plugins+=(heroku)                 # http://www.heroku.com/
@@ -84,12 +83,8 @@ plugins+=(vagrant)                # easy ready to make develop environment
 plugins+=(docker)
 plugins+=(cabal stack)          # for haskell
 plugins+=(compleat)               # completion for 
-#plugins+=(autojump)               # easy to jump directory https://github.com/joelthelion/autojump
 plugins+=(urltools)                 # for urlencode(), urldecode()
 plugins+=(z)                        # easy to jump directory https://github.com/rupa/z.git
-
-# custom plugins
-plugins+=(show-buffer-stack)        # show previous command when stack command with Ctrl-Q 
 
 [[ -e $ZSH/oh-my-zsh.sh ]] && source $ZSH/oh-my-zsh.sh
 
