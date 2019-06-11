@@ -54,6 +54,8 @@
     # Export ../diff.zip archive  $target_id $files
     zip-archive = archive --format=zip --worktree-attributes -o ../diff.zip 
     zip-archive-help = !echo 'eg. git zip-archive HEAD $(git ls HEAD~3 HEAD src/)'
+    # Help only
+    zip-7za-help = !echo 'eg. 7z a -tzip ../diff.zip -scsWIN "@../zip-list.txt"'
 
     co = checkout
     cob = checkout -b 
