@@ -50,10 +50,10 @@
 
     # List modified files only(without deleted fiels)  $from_id $to_id $dir/
     ls = diff --diff-filter=ACMR --name-only 
-    ls-help = !echo 'ex. git list HEAD~3 HEAD src/'
+    ls-help = !echo 'ex. git ls HEAD~3 HEAD src/'
     # Export ../diff.zip archive  $target_id $files
     zip-archive = archive --format=zip --worktree-attributes -o ../diff.zip 
-    zip-archive-help = !echo 'eg. git zip-diff HEAD $(git ls HEAD~3 HEAD src/)'
+    zip-archive-help = !echo 'eg. git zip-archive HEAD $(git ls HEAD~3 HEAD src/)'
 
     co = checkout
     cob = checkout -b 
