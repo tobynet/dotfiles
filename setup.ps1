@@ -8,19 +8,11 @@ function isSymboliLink($path) {
 }
 
 function makeSymbolicLink($originalPath, $linkPathToCreate) {
-    # cmd /c mklink <link_path_to_create> <original_path>
-    New-Item -ItemType SymbolicLink -Path $linkPathToCreate -Value $originalPath
+    & "$env:ComSpec" /c mklink $linkPathToCreate $originalPath
+    #New-Item -ItemType SymbolicLink -Path $linkPathToCreate -Value $originalPath
 }
 
 # ----
-
-echo "Run as Administrator..."
-If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
-{    
-    $path = $MyInvocation.MyCommand.Path
-    Start-Process powershell -ArgumentList "-noprofile -file $path" -verb RunAs
-    Break
-}
 
 $targetDirectory = $HOME
 
@@ -33,9 +25,15 @@ echo ""
 
 echo "# Make Symbolic Links"
 
+Push-Location $targetDirectory
+
 ForEach ($path in $files) {
-    $private:originalPath = $(Join-Path $PWD $path)
-    $private:linkPathToCreate = $(Join-Path $targetDirectory $path)
+    $private:originDir = Get-Location -stack    # => ~/dotfiles
+    $private:relativeDir = Resolve-Path -Relative $originDir    # => ./dotfiles
+
+    $private:originalPath = Join-Path $relativeDir $path    # => ./dotfiles/.gitconfig 
+    $private:linkPathToCreate = $path   # => .gitconfig
+
     echo "  Make symbolic link: $originalPath -> $linkPathToCreate ..."
 
     if (isSymboliLink($linkPathToCreate)) {
@@ -52,7 +50,10 @@ ForEach ($path in $files) {
     echo ""
 }
 
+Pop-Location
 
-$files | % { Join-Path $targetDirectory $_ } | ls
+# Show target files
+#$files | % { Join-Path $targetDirectory $_ } | ls
+& "$env:ComSpec" /c "dir $targetDirectory | findStr SYMLINK"
 
 pause
