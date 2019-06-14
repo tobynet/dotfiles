@@ -16,14 +16,14 @@ function makeSymbolicLink($originalPath, $linkPathToCreate) {
 
 $targetDirectory = $HOME
 
-cd $PSScriptRoot
+Set-Location $PSScriptRoot
 
-echo "Configurations:"
-echo "  Current Directory: $PWD.Path"
-echo "  TargetDirectory: $targetDirectory"
-echo ""
+Write-Host "Configurations:"
+Write-Host "  Current Directory: $PWD.Path"
+Write-Host "  TargetDirectory: $targetDirectory"
+Write-Host ""
 
-echo "# Make Symbolic Links"
+Write-Host "# Make Symbolic Links"
 
 Push-Location $targetDirectory
 
@@ -34,20 +34,20 @@ ForEach ($path in $files) {
     $private:originalPath = Join-Path $relativeDir $path    # => ./dotfiles/.gitconfig 
     $private:linkPathToCreate = $path   # => .gitconfig
 
-    echo "  Make symbolic link: $originalPath -> $linkPathToCreate ..."
+    Write-Host "  Make symbolic link: $originalPath -> $linkPathToCreate ..."
 
     if (isSymboliLink($linkPathToCreate)) {
         # Remove it if target path is a Symbolic Link.
-        echo "  Removing $linkPathToCreate ..."
+        Write-Host "  Removing $linkPathToCreate ..."
         Remove-Item $linkPathToCreate
     } elseif (Test-Path $linkPathToCreate) {
         # Keep existen file if target path is NOT a symlink.
-        echo "  Backup $linkPathToCreate -> $linkPathToCreate.bak"
+        Write-Host "  Backup $linkPathToCreate -> $linkPathToCreate.bak"
         Move-Item $linkPathToCreate "$linkPathToCreate.bak"
     }
 
     makeSymbolicLink $originalPath $linkPathToCreate 
-    echo ""
+    Write-Host ""
 }
 
 Pop-Location
